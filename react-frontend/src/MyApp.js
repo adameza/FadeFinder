@@ -1,6 +1,7 @@
 import './App.css';
 import CustomerLogin from "./components/Customer-Login/customer-login"
 import BarberLogin from "./components/Barber-Login/barber-login"
+import BarberSelect from './components/BarberSelect/barberselect';
 import { BrowserRouter, Route , Routes} from  'react-router-dom'
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/customerlogin" element={<CustomerLogin />} />
             <Route path="/barberlogin" element={<BarberLogin />} />
+            <Route path="/barberselect" element={<BarberSelect />} />
           </Routes>
 
         </ BrowserRouter>
