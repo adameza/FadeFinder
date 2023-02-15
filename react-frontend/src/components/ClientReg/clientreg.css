@@ -14,9 +14,9 @@ select {
   width: 100%;
 }
 
-button[type="submit"] {
+button[type='submit'] {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 5px;
@@ -25,7 +25,7 @@ button[type="submit"] {
   transition: all 0.3s;
 }
 
-button[type="submit"]:hover {
+button[type='submit']:hover {
   background-color: #3e8e41;
 }
 
@@ -51,7 +51,7 @@ tr:hover {
 
 @media (max-width: 768px) {
   form {
-      width: 80%;
+    width: 80%;
   }
 }
 
@@ -70,7 +70,7 @@ td {
 }
 
 th {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
 
@@ -80,11 +80,11 @@ tr:nth-child(even) {
 
 @keyframes appear {
   from {
-      opacity: 0;
+    opacity: 0;
   }
 
   to {
-      opacity: 1;
+    opacity: 1;
   }
 }
 
