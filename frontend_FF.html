@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FadeFinder</title>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        input,
+        select {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        tr {
+            transition: all 0.3s;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        @media (max-width: 768px) {
+            form {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center, font-family:sans-serif;">FadeFinder</h1>
+    <form id="schedule-appointment-form">
+        <h2 style="text-align:center; font-family: sans-serif;">Schedule Appointmnet</h2>
+        <div>
+            <label for="client-name">Client Name:</label>
+            <input type="text" id="client-name" name="client-name">
+        </div>
+        <div>
+            <label for="client-email">Client Email:</label>
+            <input type="email" id="client-email" name="client-email">
+        </div>
+        <div>
+            <label for="barber-name">Barber Name:</label>
+            <select id="barber-name" name="barber-name">
+                <option value="Jane Smith">Jane Smith</option>
+                <option value="John Doe"> John Doe</option>
+            </select>
+        </div>
+        <div>
+            <label for="appointment-date">Appointment Date:</label>
+            <input type="date" id="appointment-date" name="appointment-date">
+        </div>
+        <div>
+            <label for="appointment-time"> Appointment Time:</label>
+            <input type="time" id="appointment-time" name="appointment-time">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2 style="text-align: center; font-family: sans-serif;">Appointments</h2>
+    <table id="appointments">
+        <thead>
+            <tr>
+                <th>Client Name</th>
+                <th>Barber Name</th>
+                <th>Appointment Date</th>
+                <th>Appointment Time</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 0 auto;
+            font-family: sans-serif;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        tbody tr {
+            animation: appear 0.5s ease-in-out;
+        }
+    </style>
+    <script>
+
+    class Barber{
+        constructor(name)
+        {
+            this.name = name;   
+        }
+    }
+
+    class Appointment
+    {
+        constructor(client, barber, date, time)
+        {
+            this.client = client;
+            this.barber = barber;
+            this.date = date;
+            this.time = time;
+        }
+    }
+
+    class Client
+    {
+        constructor(name, email)
+        {
+            this.name = name;
+            this.email = email;
+            this.preferredAppointments = [];
+        }
+
+        addPreferredAppointments(appoinment)
+        {
+            this.preferredAppointments.push(appoinment);
+        }
+    }
+
+    class BarberFinder{
+        
+    }
+
+
+    </script>
+    </body>
+</html>
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
