@@ -7,9 +7,9 @@ const app = express()
 
 const port = dotenv.env.PORT
 
-const clientServices = require('./mongoose/client-services');
-const barberServices = require('./mongoose/barber-services');
-const appointmentServices = require('./mongoose/appointment-services');
+const clientServices = require('./models/client-services');
+const barberServices = require('./models/barber-services');
+const appointmentServices = require('./models/appointment-services');
 
 
 app.use(cors())
