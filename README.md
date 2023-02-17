@@ -6,5 +6,5 @@ the only urls we have right now are "http://localhost:3000/customerlogin" and "h
 
 Style guide used: React/JavaScript (airbnb)
 
-IDE plugins used: Visual Studio Code (ESlint, prettier); allow "Format on Save" option in IDE settings; "npm run format" in project root folder
+IDE plugins used: Visual Studio Code (ESlint, prettier); allow "Format on Save" option in IDE settings; `npm run format` in project root folder
 recursively formats .js, .jsx, .css, .md, .json files
