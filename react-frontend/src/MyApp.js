@@ -1,5 +1,6 @@
 import './App.css'
 import CustomerLogin from './components/Customer-Login/customer-login'
+import CustomerNew from './components/Customer-Login/customer-new'
 import BarberLogin from './components/Barber-Login/barber-login'
 import BarberSelect from './components/BarberSelect/barberselect'
 import ClientRegistration from './components/ClientReg/clientreg'
@@ -12,6 +13,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/customerlogin" element={<CustomerLogin />} />
+            <Route path="/customerlogin/new" element={<CustomerNew />} />
             <Route path="/barberlogin" element={<BarberLogin />} />
             <Route path="/barberselect" element={<BarberSelect />} />
             <Route path="/clientreg" element={<ClientRegistration />} />

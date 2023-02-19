@@ -39,7 +39,7 @@ export default function CustomerLogin() {
         <button className="loginButton">LOG IN</button>
         <p style={{ textAlign: 'center', marginTop: '30px' }}>
           Don't have an account?{' '}
-          <Link className="link" to="/register">
+          <Link className="link" to="/customerlogin/new">
             Create one
           </Link>
         </p>

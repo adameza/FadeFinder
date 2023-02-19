@@ -5,10 +5,10 @@ const cors = require('cors')
 const express = require('express')
 const app = express()
 
-const port = dotenv.env.PORT
+const port = 5000
 
 const clientServices = require('./models/client-services');
-const barberServices = require('./models/barber-services');
+// const barberServices = require('./models/barber-services');
 const appointmentServices = require('./models/appointment-services');
 
 
@@ -29,6 +29,15 @@ app.get('/clients', async (req, res) => {
       console.log(error);
       res.status(500).send('An error ocurred in the server.');
   }
+});
+
+app.post('/clients', async (req, res) => {
+  const client = req.body;
+  const result = await clientServices.addClient(client);
+  if (result)
+      res.status(201).send(result);
+  else
+      res.status(500).end();
 });
 
 app.get('/barbers', async (req, res) => {
