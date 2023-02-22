@@ -9,7 +9,7 @@ export default function CustomerLogin() {
   const handleSubmit = (e) => {
     if (fullname.trim() && email.trim()) {
       e.preventDefault()
-      let newClient = { name: fullname, email: email}
+      let newClient = { name: fullname, email: email }
       makeClientPost(newClient)
       console.log({ fullname, email })
       setFullname('')

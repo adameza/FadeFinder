@@ -8,7 +8,7 @@ const BarberSchema = new mongoose.Schema(
       trim: true,
     },
     //availability : [Date],
-    regularClients : [Number]
+    regularClients: [Number],
   },
   { collection: 'barbers' }
 )
