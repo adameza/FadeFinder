@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import makeClientPost from '../../BackendRoutes/clients/routes'
+import makeClientPost from '../../BackendRoutes/client-routes'
 
 export default function CustomerLogin() {
   const [fullname, setFullname] = useState('')

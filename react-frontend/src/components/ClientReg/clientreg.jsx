@@ -1,12 +1,28 @@
 import './clientreg.css'
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function ClientRegistration() {
+  const [appDate, setAppDate] = useState('')
+
+  const getDay = () => {
+    var date = new Date(appDate)
+    date.setDate(date.getDate() + 1)
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat']
+    return days[date.getDay()]
+  }
+
+  const fetchAppointments = (d) => {
+      d.preventDefault()
+      let day = getDay()
+      console.log({ day })
+  }
+
+  // console.log({ appDate })
   return (
     <body>
       <title>FadeFinder</title>
       <h1>FadeFinder</h1>
-      <form id="schedule-appointment-form">
+      <form id="schedule-appointment-form" onSubmit={fetchAppointments}>
         <h2>Schedule Appointmnet</h2>
         <div>
           <label for="client-name">Client Name:</label>
@@ -25,20 +41,18 @@ export default function ClientRegistration() {
         </div>
         <div>
           <label for="appointment-date">Appointment Date:</label>
-          <input type="date" id="appointment-date" name="appointment-date" />
+          <input type="date" 
+                 id="appointment-date"
+                 name="appointment-date"
+                 onChange={(e) => setAppDate(e.target.valueAsDate)} />
         </div>
-        <div>
-          <label for="appointment-time"> Appointment Time:</label>
-          <input type="time" id="appointment-time" name="appointment-time" />
-        </div>
-        <button type="submit">Submit</button>
+        <button>Find Appointments</button>
       </form>
 
       <h2>Appointments</h2>
       <table id="appointments">
         <thead>
           <tr>
-            <th>Client Name</th>
             <th>Barber Name</th>
             <th>Appointment Date</th>
             <th>Appointment Time</th>
