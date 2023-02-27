@@ -4,6 +4,7 @@ import CustomerNew from './components/Customer-Login/customer-new'
 import BarberLogin from './components/Barber-Login/barber-login'
 import BarberSelect from './components/BarberSelect/barberselect'
 import ClientRegistration from './components/ClientReg/clientreg'
+import BarberFinder from './components/BarberFinder/barberfinder'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route path="/barberlogin" element={<BarberLogin />} />
             <Route path="/barberselect" element={<BarberSelect />} />
             <Route path="/clientreg" element={<ClientRegistration />} />
+            <Route path="/barberfinder" element={<BarberFinder />} />
           </Routes>
         </BrowserRouter>
       </header>
