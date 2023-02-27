@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Select from 'react-select'
+import "./form.css"
 import TimeRange from 'react-time-range';
 
 function Form(props) {
@@ -22,17 +23,34 @@ function Form(props) {
      }
   );
 
+  function convertTime(date) {
+    let time = new Date(date)
+    let hrs = time.getHours()
+    let min = time.getMinutes()
+    if (hrs > 12)
+      var post = "PM"
+    else 
+      var post = "AM"
+    hrs = hrs % 12
+    return `${hrs}:${min} ${post}`
+  }
+
   function handleChange(event) {
-    const { name, value } = event.target;
-    if (name === "day")
+    const day = event.label;
+    const start = event.startTime;
+    const end = event.endTime;
+    if (day) {
       setAvail(
-         {day: value, startTime: avail['startTime'], endTime: avail['endTime']});
-    else if (name === "startTime")
+          {day: day, startTime: avail['startTime'], endTime: avail['endTime']});
+      }
+    else if (start) {
       setAvail(
-        {day: avail['day'], startTime: value, endTime: avail['endTime']});
-    else
+        {day: avail['day'], startTime: convertTime(start), endTime: avail['endTime']});
+      }
+    else if (end){
       setAvail(
-        {day: avail['day'], startTime: avail['startTime'], endTime: value});
+        {day: avail['day'], startTime: avail['startTime'], endTime: convertTime(end)});
+      }
   }
 
   function submitForm() {
@@ -44,15 +62,13 @@ function Form(props) {
     <form>
       <label htmlFor="day">Day</label>
       <Select 
-        isSearchable={true} 
-        name="day"
-        id="day"
+        isSearchable={false} 
         options={options}
-        value={avail.day}
+        value={{label: avail.day}}
         onChange={handleChange}
       />
       <label htmlFor="time">Time</label>
-      <TimeRange startMoment={avail.startTime} endMoment={avail.endTime} onChange={handleChange}/>
+      <TimeRange onChange={handleChange}/>
       <input type="button" value="Submit" onClick={submitForm} />
     </form>
 );
