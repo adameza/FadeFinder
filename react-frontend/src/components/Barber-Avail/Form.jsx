@@ -32,6 +32,8 @@ function Form(props) {
     else 
       var post = "AM"
     hrs = hrs % 12
+    if (min < 10)
+      return `${hrs}:0${min} ${post}`
     return `${hrs}:${min} ${post}`
   }
 
@@ -69,7 +71,7 @@ function Form(props) {
       />
       <label htmlFor="time">Time</label>
       <TimeRange onChange={handleChange}/>
-      <input type="button" value="Submit" onClick={submitForm} />
+      <input type="button" value="Add" onClick={submitForm} />
     </form>
 );
 

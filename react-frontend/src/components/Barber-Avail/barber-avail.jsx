@@ -1,28 +1,32 @@
-import { React , useState } from "react";
+import { React , useState , useEffect } from "react";
 import "./barber-avail.css"
 import Form from "./Form"
 import Table from "./Table"
-
-// import moment from 'moment';
+import { getBarberAvailability , addBarberAvail } from "../../BackendRoutes/barber-routes";
 
 export default function BarberAvailability() {
 
-  const options = [
-    { value: 'barber_id', label: 'Sun' },
-    { value: 'barber_id', label: 'Mon' },
-    { value: 'barber0_id', label: 'Tue' },
-    { value: 'barber1_id', label: 'Wed' },
-    { value: 'barber1_id', label: 'Thu' },
-    { value: 'barber1_id', label: 'Fri' },
-    { value: 'barber1_id', label: 'Sat' }
-  ]
-
   const [allAvail, setAllAvail] = useState([]);
+  const queryParameters = new URLSearchParams(window.location.search)
+  const barberName = queryParameters.get("name")
 
+  useEffect(() => {
+    getBarberAvailability(barberName).then( result => {
+        if (result) {
+          setAllAvail(result);
+          console.log(result)
+          console.log("good")
+        }
+    });
+  }, [] );
 
   function updateList(avail) { 
-    console.log(avail)
-    setAllAvail([...allAvail, avail] );
+    addBarberAvail(barberName, avail).then( result => {
+      if (result) {
+        console.log(avail)
+        setAllAvail([...allAvail, avail] );
+      }
+    })
   }
 
   function removeOneCharacter (index) {

@@ -51,6 +51,24 @@ app.get('/barbers', async (req, res) => {
   }
 })
 
+app.get('/barbers/:name', async (req, res) => {
+  const barberName = req.params['name']
+  const result = await barberServices.getBarberByName(barberName)
+  if (result === undefined || result === null)
+    res.status(404).send('Resource not found.');
+  else {
+    res.send({barber: result});
+  }
+})
+
+app.post('/barbers/:name/avail', async (req, res) => {
+  const avail = req.body
+  const barberName = req.params['name']
+  const result = await barberServices.addAvailability(barberName, avail)
+  if (result) res.status(201).send(result)
+  else res.status(500).end()
+})
+
 app.post('/barbers', async (req, res) => {
   const barber = req.body
   const result = await barberServices.addBarber(barber)
