@@ -2,7 +2,7 @@ import { React , useState , useEffect } from "react";
 import "./barber-avail.css"
 import Form from "./Form"
 import Table from "./Table"
-import { getBarberAvailability , addBarberAvail } from "../../BackendRoutes/barber-routes";
+import { getBarberAvail , addBarberAvail, deleteBarberAvail } from "../../BackendRoutes/barber-routes";
 
 export default function BarberAvailability() {
 
@@ -11,7 +11,7 @@ export default function BarberAvailability() {
   const barberName = queryParameters.get("name")
 
   useEffect(() => {
-    getBarberAvailability(barberName).then( result => {
+    getBarberAvail(barberName).then( result => {
         if (result) {
           setAllAvail(result);
           console.log(result)
@@ -30,10 +30,16 @@ export default function BarberAvailability() {
   }
 
   function removeOneCharacter (index) {
-    const updated = allAvail.filter((avail, i) => {
-        return i !== index
-      });
-      setAllAvail(updated);
+    console.log(allAvail[index])
+    deleteBarberAvail(barberName, allAvail[index]).then( result => {
+      if (result) {
+        const updated = allAvail.filter((avail, i) => {
+          return i !== index
+        });
+        console.log(updated)
+        setAllAvail(updated);
+      }
+    })
     }
   
 

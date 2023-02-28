@@ -66,8 +66,19 @@ app.post('/barbers/:name/avail', async (req, res) => {
   const barberName = req.params['name']
   const result = await barberServices.addAvailability(barberName, avail)
   if (result) res.status(201).send(result)
-  else res.status(500).end()
+  else res.status(500).send(result)
 })
+
+app.delete('/barbers/:name/avail', async (req, res) => {
+  const barberName = req.params['name']; //or req.params.id
+  const avail = req.body
+  let result = await barberServices.deleteAvailabilty(barberName, avail)
+  if (result === undefined || result.length == 0)
+      res.status(404).send('Resource not found.');
+  else {
+      res.status(200).send(result);
+  }
+});
 
 app.post('/barbers', async (req, res) => {
   const barber = req.body

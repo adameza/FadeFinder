@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const barberModel = require('./barber')
-mongoose.set('debug', true)
+// mongoose.set('debug', true)
 
 require('dotenv').config()
 
@@ -52,7 +52,24 @@ async function addAvailability(barber_name, avail) {
   }
 }
 
+async function deleteAvailabilty(barber_name, avail) {
+  try {
+    const barberToUpdate = await barberModel.findOne({name: barber_name})
+    let avail_list = barberToUpdate.availability.filter((x) => {
+        return x._id.toString() !== avail._id
+      })
+    console.log("avail_list")
+    const res = await barberModel.updateOne({name: barber_name}, {availability: avail_list}) 
+    return res
+  }
+  catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
 exports.getBarbers = getBarbers
 exports.getBarberByName = getBarberByName
 exports.addBarber = addBarber
 exports.addAvailability = addAvailability
+exports.deleteAvailabilty = deleteAvailabilty
