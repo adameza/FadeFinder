@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Kobe",
+    "availability": "xyz",
+    "latitude": 40.6643,
+    "longitude": -73.9385
+  },
+  {
+    "name": "LeBron",
+    "availability": "abc",
+    "latitude": 35.305,
+    "longitude": -120.6625
+  }
+]
