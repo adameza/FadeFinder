@@ -99,6 +99,23 @@ app.get('/appointments', async (req, res) => {
   }
 })
 
+app.get('/appointments/:day', async (req, res) => {
+  try {
+    const day = req.params['day']
+    const barbers = await barberServices.getBarbers()
+    let times = []
+    barbers.forEach((barber) => {
+      times.push(barber.availability.filter((time) => {
+        time.day === day
+      }))
+    })
+    res.send({ times })
+  } catch (error) {
+    console.log(error)
+    res.status(500).send('An error ocurred in the server.')
+  }
+})
+
 app.post('/appointments', async (req, res) => {
   const appointment = req.body
   const result = await appointmentServices.addAppointment(appointment)

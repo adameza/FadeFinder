@@ -1,8 +1,11 @@
 import './clientreg.css'
 import React, { useState } from 'react'
+import Table from './Table'
+import { getAppointmentsByDay } from '../../BackendRoutes/appointment-routes'
 
 export default function ClientRegistration() {
   const [appDate, setAppDate] = useState('')
+  const [allDates, setAllDates] = useState([])
 
   const getDay = () => {
     var date = new Date(appDate)
@@ -11,13 +14,17 @@ export default function ClientRegistration() {
     return days[date.getDay()]
   }
 
-  const fetchAppointments = (d) => {
-      d.preventDefault()
-      let day = getDay()
-      console.log({ day })
+  const fetchAppointments = () => {
+    let day = getDay()
+    console.log({ day })
+    getAppointmentsByDay().then( result => {
+      if (result) {
+        console.log(result);
+        setAllDates(result);
+      }
+    }
   }
 
-  // console.log({ appDate })
   return (
     <body>
       <title>FadeFinder</title>
@@ -50,16 +57,7 @@ export default function ClientRegistration() {
       </form>
 
       <h2>Appointments</h2>
-      <table id="appointments">
-        <thead>
-          <tr>
-            <th>Barber Name</th>
-            <th>Appointment Date</th>
-            <th>Appointment Time</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <Table characterData={allDates}/>
     </body>
   )
 }
