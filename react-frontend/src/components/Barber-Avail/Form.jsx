@@ -9,7 +9,7 @@ function Form(props) {
     { value: 'barber_id', label: 'Mon' },
     { value: 'barber0_id', label: 'Tue' },
     { value: 'barber1_id', label: 'Wed' },
-    { value: 'barber1_id', label: 'Thu' },
+    { value: 'barber1_id', label: 'Thurs' },
     { value: 'barber1_id', label: 'Fri' },
     { value: 'barber1_id', label: 'Sat' },
   ]

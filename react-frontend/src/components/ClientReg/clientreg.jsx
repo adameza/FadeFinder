@@ -1,7 +1,7 @@
 import './clientreg.css'
 import React, { useState } from 'react'
 import Table from './Table'
-import { getAllBarbers } from '../../BackendRoutes/barber-routes'
+// import { getAllBarbers } from '../../BackendRoutes/barber-routes'
 import { useLocation } from 'react-router-dom'
 
 export default function ClientRegistration() {
@@ -9,23 +9,23 @@ export default function ClientRegistration() {
   const [allDates, setAllDates] = useState([])
 
   const location = useLocation()
+  const barber = location.state.popupInfo
 
   const getDay = () => {
     var date = new Date(appDate)
     date.setDate(date.getDate() + 1)
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat']
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat']
     return days[date.getDay()]
   }
 
   const fetchAppointments = () => {
-    let day = getDay()
-    console.log(day)
-    getAllBarbers(day).then((result) => {
-      if (result) {
-        console.log(result)
-        setAllDates(result)
-      }
+    let dayName = getDay()
+    console.log(dayName)
+    const dates = barber.availability.filter((avail) => {
+      return avail.day === dayName
     })
+    console.log(dates)
+    setAllDates(dates)
   }
 
   return (

@@ -15,9 +15,8 @@ function TableBody(props) {
   const rows = props.characterData.map((row, index) => {
     return (
       <tr key={index}>
-        <td>{row.name}</td>
         <td>
-          {row.time.startTime} {row.time.endTime}
+          {row.startTime} {row.endTime}
         </td>
       </tr>
     )
