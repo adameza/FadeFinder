@@ -42,3 +42,15 @@ export async function getBarberAvail(barberName){
      return false;         
   }
 }
+
+export async function getAllBarbers(){
+  try {
+     const response = await axios.get('http://localhost:5000/barbers');
+     return response.data;
+  }
+  catch (error){
+     console.log(error); 
+     return false;         
+  }
+}
+

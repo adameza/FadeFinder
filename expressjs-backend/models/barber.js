@@ -8,6 +8,8 @@ const BarberSchema = new mongoose.Schema(
       trim: true,
     },
     availability: [{ day: String, startTime: String , endTime: String}],
+    lat: {type: Number},
+    lon: {type: Number}
   },
   { collection: 'barbers' }
 )

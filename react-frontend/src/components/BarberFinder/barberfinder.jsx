@@ -1,8 +1,9 @@
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './barberfinder.css'
 import * as React from 'react'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import Map, { Marker, Popup } from 'react-map-gl'
+import { getAllBarbers } from "../../BackendRoutes/barber-routes"
 
 import Pin from './pin'
 
@@ -13,25 +14,35 @@ const TOKEN =
 
 export default function BarberFinder() {
   const [popupInfo, setPopupInfo] = useState(null)
+  const [barbers, setBarbers] = useState([])
+  const [pins, setPins] = useState(null)
 
-  const pins = useMemo(
-    () =>
-      BARBERS.map((barber, index) => (
-        <Marker
-          key={`marker-${index}`}
-          longitude={barber.longitude}
-          latitude={barber.latitude}
-          anchor="bottom"
-          onClick={(e) => {
-            e.originalEvent.stopPropagation()
-            setPopupInfo(barber)
-          }}
-        >
-          <Pin />
-        </Marker>
-      )),
-    []
-  )
+  
+  useEffect(() => {
+    getAllBarbers().then( result => {
+        if (result) {
+          setBarbers(result.result);
+          console.log(result.result)
+        }
+    });
+  }, [] );
+  
+  function BarberPins() {
+    return (barbers.map((barber, index) => (
+      <Marker
+        key={`marker-${index}`}
+        longitude={barber.lon}
+        latitude={barber.lat}
+        anchor="bottom"
+        onClick={(e) => {
+          e.originalEvent.stopPropagation()
+          setPopupInfo(barber)
+        }}
+      >
+        <Pin />
+      </Marker>
+    )))
+  }
 
   return (
     <div>
@@ -45,19 +56,19 @@ export default function BarberFinder() {
         mapboxAccessToken={TOKEN}
         style={{ width: '100vw', height: '100vh' }}
       >
-        {pins}
+        <BarberPins/>
 
         {popupInfo && (
           <Popup
             anchor="top"
             closeButton={false}
-            longitude={Number(popupInfo.longitude)}
-            latitude={Number(popupInfo.latitude)}
+            longitude={Number(popupInfo.lon)}
+            latitude={Number(popupInfo.lat)}
             onClose={() => setPopupInfo(null)}
             style={{}}
           >
             <div>
-              {popupInfo.name}, {popupInfo.availability}
+              {popupInfo.name}
               {/* <button>
                 Schedule Now
               </button> */}
