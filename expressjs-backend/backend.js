@@ -8,7 +8,7 @@ const app = express()
 const port = 5000
 
 const clientServices = require('./models/client-services')
-const barberServices = require('./models/barber-services');
+const barberServices = require('./models/barber-services')
 const appointmentServices = require('./models/appointment-services')
 
 app.use(cors())
@@ -55,9 +55,9 @@ app.get('/barbers/:name', async (req, res) => {
   const barberName = req.params['name']
   const result = await barberServices.getBarberByName(barberName)
   if (result === undefined || result === null)
-    res.status(404).send('Resource not found.');
+    res.status(404).send('Resource not found.')
   else {
-    res.send({barber: result});
+    res.send({ barber: result })
   }
 })
 
@@ -70,15 +70,15 @@ app.post('/barbers/:name/avail', async (req, res) => {
 })
 
 app.delete('/barbers/:name/avail', async (req, res) => {
-  const barberName = req.params['name']; //or req.params.id
+  const barberName = req.params['name'] //or req.params.id
   const avail = req.body
   let result = await barberServices.deleteAvailabilty(barberName, avail)
   if (result === undefined || result.length == 0)
-      res.status(404).send('Resource not found.');
+    res.status(404).send('Resource not found.')
   else {
-      res.status(200).send(result);
+    res.status(200).send(result)
   }
-});
+})
 
 app.post('/barbers', async (req, res) => {
   const barber = req.body
@@ -107,8 +107,7 @@ app.get('/appointments/:day', async (req, res) => {
     let times = []
     barbers.forEach((barber) => {
       barber.availability.forEach((time) => {
-        if (time.day == day)
-          times.push({name: barber.name, time: time})
+        if (time.day == day) times.push({ name: barber.name, time: time })
       })
     })
     res.send({ times })

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function TableHeader()  {
+function TableHeader() {
   return (
     <thead>
       <tr>
@@ -8,7 +8,7 @@ function TableHeader()  {
         <th>Appointment Time</th>
       </tr>
     </thead>
-  );
+  )
 }
 
 function TableBody(props) {
@@ -16,24 +16,21 @@ function TableBody(props) {
     return (
       <tr key={index}>
         <td>{row.name}</td>
-        <td>{row.time.startTime} {row.time.endTime}</td>
+        <td>
+          {row.time.startTime} {row.time.endTime}
+        </td>
       </tr>
-    );
-   }
-  );
-  return (
-      <tbody>
-        {rows}
-       </tbody>
-   );
+    )
+  })
+  return <tbody>{rows}</tbody>
 }
 
-function Table (props) {
+function Table(props) {
   return (
     <table>
       <TableHeader />
       <TableBody characterData={props.characterData} />
     </table>
-  );
+  )
 }
-export default Table;
+export default Table

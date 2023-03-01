@@ -1,13 +1,14 @@
-import "./home.css"
+import './home.css'
 
 export default function Home() {
-
-
-
   return (
     <main className="home">
       <head>
-        <link href="../DaySchedule/dayschedule-widget.css" type="text/html" rel="stylesheet" />
+        <link
+          href="../DaySchedule/dayschedule-widget.css"
+          type="text/html"
+          rel="stylesheet"
+        />
         <script src="../DaySchedule/dayschedule-widget.js" defer></script>
       </head>
       <div className="buttons">

@@ -2,7 +2,10 @@ import axios from 'axios'
 
 export async function addAppointment(appointment) {
   try {
-    const response = await axios.post('http://localhost:5000/appointments', appointment)
+    const response = await axios.post(
+      'http://localhost:5000/appointments',
+      appointment
+    )
     return response
   } catch (error) {
     console.log(error)
@@ -22,7 +25,9 @@ export async function getAppointments() {
 
 export async function getAppointmentsByDay(day) {
   try {
-    const response = await axios.get('http://localhost:5000/appointments/'.concat(day))
+    const response = await axios.get(
+      'http://localhost:5000/appointments/'.concat(day)
+    )
     return response.data.times
   } catch (error) {
     console.log(error)

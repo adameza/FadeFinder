@@ -26,7 +26,9 @@ export default function BarberLogin() {
           className="username"
         />
         <Link to="/barberavail">
-          <button className="loginButton" type="submit">LOG IN</button>
+          <button className="loginButton" type="submit">
+            LOG IN
+          </button>
         </Link>
       </form>
     </main>

@@ -29,10 +29,9 @@ async function addBarber(barber) {
 
 async function getBarberByName(barber_name) {
   try {
-    const barber = await barberModel.findOne({name: barber_name})
+    const barber = await barberModel.findOne({ name: barber_name })
     return barber
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error)
     return false
   }
@@ -40,10 +39,13 @@ async function getBarberByName(barber_name) {
 
 async function addAvailability(barber_name, avail) {
   try {
-    const barberToUpdate = await barberModel.findOne({name: barber_name})
+    const barberToUpdate = await barberModel.findOne({ name: barber_name })
     let avail_list = barberToUpdate.availability
     avail_list.push(avail)
-    const res = await barberModel.updateOne({name: barber_name}, {availability: avail_list}) 
+    const res = await barberModel.updateOne(
+      { name: barber_name },
+      { availability: avail_list }
+    )
     console.log(res)
     return res
   } catch (error) {
@@ -54,15 +56,17 @@ async function addAvailability(barber_name, avail) {
 
 async function deleteAvailabilty(barber_name, avail) {
   try {
-    const barberToUpdate = await barberModel.findOne({name: barber_name})
+    const barberToUpdate = await barberModel.findOne({ name: barber_name })
     let avail_list = barberToUpdate.availability.filter((x) => {
-        return x._id.toString() !== avail._id
-      })
-    console.log("avail_list")
-    const res = await barberModel.updateOne({name: barber_name}, {availability: avail_list}) 
+      return x._id.toString() !== avail._id
+    })
+    console.log('avail_list')
+    const res = await barberModel.updateOne(
+      { name: barber_name },
+      { availability: avail_list }
+    )
     return res
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error)
     return false
   }
