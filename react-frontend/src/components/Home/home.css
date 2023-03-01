@@ -1,0 +1,17 @@
+body {
+  background-color: #FBFBFF;
+}
+
+button {
+  margin: auto;
+  width: 80%;
+  background-color: #9191E9;
+  padding: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
