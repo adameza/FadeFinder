@@ -23,7 +23,7 @@ export async function getAppointments() {
 export async function getAppointmentsByDay(day) {
   try {
     const response = await axios.get('http://localhost:5000/appointments/'.concat(day))
-    return response
+    return response.data.times
   } catch (error) {
     console.log(error)
     return false

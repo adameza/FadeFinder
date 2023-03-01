@@ -103,11 +103,13 @@ app.get('/appointments/:day', async (req, res) => {
   try {
     const day = req.params['day']
     const barbers = await barberServices.getBarbers()
+    console.log(barbers)
     let times = []
     barbers.forEach((barber) => {
-      times.push(barber.availability.filter((time) => {
-        time.day === day
-      }))
+      barber.availability.forEach((time) => {
+        if (time.day == day)
+          times.push({name: barber.name, time: time})
+      })
     })
     res.send({ times })
   } catch (error) {

@@ -5,7 +5,6 @@ function TableHeader()  {
     <thead>
       <tr>
         <th>Barber Name</th>
-        <th>Appointment Date</th>
         <th>Appointment Time</th>
       </tr>
     </thead>
@@ -17,8 +16,7 @@ function TableBody(props) {
     return (
       <tr key={index}>
         <td>{row.name}</td>
-        <td>{row.day}</td>
-        <td>{row.endTime} {row.startTime}</td>
+        <td>{row.time.startTime} {row.time.endTime}</td>
       </tr>
     );
    }

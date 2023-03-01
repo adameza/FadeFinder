@@ -16,48 +16,47 @@ export default function ClientRegistration() {
 
   const fetchAppointments = () => {
     let day = getDay()
-    console.log({ day })
-    getAppointmentsByDay().then( result => {
+    console.log(day)
+    getAppointmentsByDay(day).then( result => {
       if (result) {
         console.log(result);
         setAllDates(result);
       }
-    }
+    })
   }
 
   return (
-    <body>
+    <div>
       <title>FadeFinder</title>
       <h1>FadeFinder</h1>
-      <form id="schedule-appointment-form" onSubmit={fetchAppointments}>
+      <form id="schedule-appointment-form">
         <h2>Schedule Appointmnet</h2>
         <div>
-          <label for="client-name">Client Name:</label>
+          <label>Client Name:</label>
           <input type="text" id="client-name" name="client-name" />
         </div>
         <div>
-          <label for="client-email">Client Email:</label>
+          <label>Client Email:</label>
           <input type="email" id="client-email" name="client-email" />
         </div>
         <div>
-          <label for="barber-name">Barber Name:</label>
+          <label>Barber Name:</label>
           <select id="barber-name" name="barber-name">
             <option value="Jane Smith">Jane Smith</option>
             <option value="John Doe"> John Doe</option>
           </select>
         </div>
         <div>
-          <label for="appointment-date">Appointment Date:</label>
+          <label>Appointment Date:</label>
           <input type="date" 
                  id="appointment-date"
                  name="appointment-date"
                  onChange={(e) => setAppDate(e.target.valueAsDate)} />
         </div>
-        <button>Find Appointments</button>
       </form>
-
+      <button onClick={fetchAppointments}>Find Appointments</button>
       <h2>Appointments</h2>
       <Table characterData={allDates}/>
-    </body>
+    </div>
   )
 }
