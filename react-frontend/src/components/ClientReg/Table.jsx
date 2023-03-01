@@ -4,7 +4,6 @@ function TableHeader() {
   return (
     <thead>
       <tr>
-        <th>Barber Name</th>
         <th>Appointment Time</th>
       </tr>
     </thead>
