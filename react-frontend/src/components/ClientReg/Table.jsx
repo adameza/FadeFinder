@@ -16,6 +16,9 @@ function TableBody(props) {
       <tr key={index}>
         <td>
           {row.startTime} {row.endTime}
+          <div>
+            <button onClick={() => props.schedule(index)}>Schedule</button>
+          </div>
         </td>
       </tr>
     )
@@ -27,7 +30,7 @@ function Table(props) {
   return (
     <table>
       <TableHeader />
-      <TableBody characterData={props.characterData} />
+      <TableBody characterData={props.characterData} schedule={props.schedule}/>
     </table>
   )
 }

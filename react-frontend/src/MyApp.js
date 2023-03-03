@@ -20,7 +20,7 @@ function App() {
             <Route path="/barberselect" element={<BarberSelect />} />
             <Route path="/clientreg" element={<ClientRegistration />} />
             <Route path="/barberavail" element={<BarberAvailability />} />
-            <Route path="/barberfinder" element={<BarberFinder />} />
+            <Route path="/" element={<BarberFinder />} />
           </Routes>
         </BrowserRouter>
       </header>
