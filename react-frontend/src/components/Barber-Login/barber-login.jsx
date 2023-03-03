@@ -3,13 +3,11 @@ import { Link } from 'react-router-dom'
 
 export default function BarberLogin() {
   const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
 
   const handleSubmit = (e) => {
-    if (username.trim() && password.trim()) {
+    if (username.trim()) {
       e.preventDefault()
-      console.log({ username, password })
-      setPassword('')
+      console.log({ username })
       setUsername('')
     }
   }
@@ -27,22 +25,11 @@ export default function BarberLogin() {
           onChange={(e) => setUsername(e.target.value)}
           className="username"
         />
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="password"
-        />
-        <button className="loginButton">LOG IN</button>
-        <p style={{ textAlign: 'center', marginTop: '30px' }}>
-          Don't have an account?{' '}
-          <Link className="link" to="/register">
-            Create one
-          </Link>
-        </p>
+        <Link to="/barberavail">
+          <button className="loginButton" type="submit">
+            LOG IN
+          </button>
+        </Link>
       </form>
     </main>
   )

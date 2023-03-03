@@ -1,51 +1,65 @@
 import './clientreg.css'
-import React from 'react'
+import React, { useState } from 'react'
+import Table from './Table'
+// import { getAllBarbers } from '../../BackendRoutes/barber-routes'
+import { useLocation } from 'react-router-dom'
 
 export default function ClientRegistration() {
+  const [appDate, setAppDate] = useState('')
+  const [allDates, setAllDates] = useState([])
+
+  const location = useLocation()
+  const barber = location.state.popupInfo
+
+  const getDay = () => {
+    var date = new Date(appDate)
+    date.setDate(date.getDate() + 1)
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat']
+    return days[date.getDay()]
+  }
+
+  const fetchAppointments = () => {
+    let dayName = getDay()
+    console.log(dayName)
+    const dates = barber.availability.filter((avail) => {
+      return avail.day === dayName
+    })
+    console.log(dates)
+    setAllDates(dates)
+  }
+
   return (
-    <body>
+    <div>
       <title>FadeFinder</title>
       <h1>FadeFinder</h1>
+
       <form id="schedule-appointment-form">
         <h2>Schedule Appointmnet</h2>
         <div>
-          <label for="client-name">Client Name:</label>
-          <input type="text" id="client-name" name="client-name" />
+          <label>Barber Name: {location.state.popupInfo.name}</label>
         </div>
         <div>
-          <label for="client-email">Client Email:</label>
+          <label>Client Name:</label>
+          <input type="text" id="client-name" name="client-name" />
+        </div>
+
+        <div>
+          <label>Client Email:</label>
           <input type="email" id="client-email" name="client-email" />
         </div>
         <div>
-          <label for="barber-name">Barber Name:</label>
-          <select id="barber-name" name="barber-name">
-            <option value="Jane Smith">Jane Smith</option>
-            <option value="John Doe"> John Doe</option>
-          </select>
+          <label>Appointment Date:</label>
+          <input
+            type="date"
+            id="appointment-date"
+            name="appointment-date"
+            onChange={(e) => setAppDate(e.target.valueAsDate)}
+          />
         </div>
-        <div>
-          <label for="appointment-date">Appointment Date:</label>
-          <input type="date" id="appointment-date" name="appointment-date" />
-        </div>
-        <div>
-          <label for="appointment-time"> Appointment Time:</label>
-          <input type="time" id="appointment-time" name="appointment-time" />
-        </div>
-        <button type="submit">Submit</button>
       </form>
-
+      <button onClick={fetchAppointments}>Find Appointments</button>
       <h2>Appointments</h2>
-      <table id="appointments">
-        <thead>
-          <tr>
-            <th>Client Name</th>
-            <th>Barber Name</th>
-            <th>Appointment Date</th>
-            <th>Appointment Time</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </body>
+      <Table characterData={allDates} />
+    </div>
   )
 }
