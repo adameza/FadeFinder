@@ -2,7 +2,10 @@ import './clientreg.css'
 import React, { useState } from 'react'
 import Table from './Table'
 // import { getAllBarbers } from '../../BackendRoutes/barber-routes'
-import addClient from '../../BackendRoutes/client-routes'
+import { addAppointment } from '../../BackendRoutes/appointment-routes'
+import { addClient } from '../../BackendRoutes/client-routes'
+import { getBarberByName } from '../../BackendRoutes/barber-routes'
+
 import { useLocation } from 'react-router-dom'
 
 export default function ClientRegistration() {
@@ -17,9 +20,12 @@ export default function ClientRegistration() {
   const barber = location.state.popupInfo
 
   const scheduleAppointment = (index) => {
-    const client_id = addClient(client)
+    const clientResult = addClient(client)
+    const barber_id = getBarberByName(location.state.popupInfo.name)._id
     const appoint = {date: appDate,
-                     client: }
+                     client: clientResult._id,
+                     barber: barber_id}
+    addAppointment(appoint)
   }
 
   const getDay = () => {
@@ -42,24 +48,17 @@ export default function ClientRegistration() {
   function handleChange(event) {
     const clientName = event.clientName
     const clientEmail = event.clientEmail
-    if (day) {
-      setAvail({
-        day: day,
-        startTime: avail['startTime'],
-        endTime: avail['endTime'],
+    if (clientName) {
+      setClient({
+        name: clientName,
+        email: client['email']
       })
-    } else if (start) {
-      setAvail({
-        day: avail['day'],
-        startTime: convertTime(start),
-        endTime: avail['endTime'],
+    } else if (clientEmail) {
+      setClient({
+        name: client['name'],
+        email: clientEmail
       })
-    } else if (end) {
-      setAvail({
-        day: avail['day'],
-        startTime: avail['startTime'],
-        endTime: convertTime(end),
-      })
+      console.log(client)
     }
   }
 

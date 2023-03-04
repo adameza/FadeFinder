@@ -57,3 +57,13 @@ export async function getAllBarbers() {
     return false
   }
 }
+
+export async function getBarberByName(barberName) {
+  try {
+    const response = await axios.get('http://localhost:5000/barbers/'.concat(barberName))
+    return response.data
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
