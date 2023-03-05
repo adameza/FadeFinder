@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-export default async function addClient(client) {
+export async function addClient(client) {
   try {
     const response = await axios.post('http://localhost:5000/clients', client)
-    return response
+    return response.data
   } catch (error) {
     console.log(error)
     return false

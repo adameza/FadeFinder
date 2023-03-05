@@ -20,12 +20,16 @@ export default function ClientRegistration() {
   const barber = location.state.popupInfo
 
   const scheduleAppointment = (index) => {
-    const clientResult = addClient(client)
-    const barber_id = getBarberByName(location.state.popupInfo.name)._id
-    const appoint = {date: appDate,
-                     client: clientResult._id,
-                     barber: barber_id}
-    addAppointment(appoint)
+    console.log(client)
+    getBarberByName(barber.name).then((barberRes) => {
+      console.log(barberRes)
+      const appoint = {date: appDate,
+        client: client,
+        barber: barberRes.barber._id}
+      console.log(appoint)
+      addAppointment(appoint)
+    })
+
   }
 
   const getDay = () => {
@@ -46,19 +50,18 @@ export default function ClientRegistration() {
   }
 
   function handleChange(event) {
-    const clientName = event.clientName
-    const clientEmail = event.clientEmail
-    if (clientName) {
+    console.log(event)
+    console.log(event.value)
+    if (event.id == "clientName") {
       setClient({
-        name: clientName,
+        name: event.value,
         email: client['email']
       })
-    } else if (clientEmail) {
+    } else if (event.id == "clientEmail") {
       setClient({
         name: client['name'],
-        email: clientEmail
+        email: event.value
       })
-      console.log(client)
     }
   }
 
@@ -78,7 +81,7 @@ export default function ClientRegistration() {
                  id="clientName"
                  name="clientName"
                  value={client.name}
-                 onChange={handleChange} />
+                 onChange={(e) => handleChange(e.target)} />
         </div>
 
         <div>
@@ -87,7 +90,7 @@ export default function ClientRegistration() {
                  id="clientEmail"
                 name="clientEmail"
                 value={client.email}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e.target)}
                 />
         </div>
         <div>
