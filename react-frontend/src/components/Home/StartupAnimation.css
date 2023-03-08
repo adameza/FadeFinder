@@ -10,7 +10,7 @@
   align-items: center;
   height: 1vh;
   background-color: #fff;
-  font-family: "Roboto Black", sans-serif;
+  font-family: 'Roboto Black', sans-serif;
   font-size: 80px;
   font-weight: 900;
   color: black;
@@ -45,7 +45,7 @@ body {
   height: 15px;
   border-radius: 40%;
   margin: 30px auto;
-  background-color: rgba(0,0,0,0.05);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 .pole-top,
 .pole-middle,
@@ -105,9 +105,9 @@ body {
   border-right-style: solid;
   border-left-style: solid;
   border-right-width: 6px;
-  border-right-color: rgba(120,120,120,0.1);
+  border-right-color: rgba(120, 120, 120, 0.1);
   border-left-width: 10px;
-  border-left-color: rgba(60,60,60,0.1);
+  border-left-color: rgba(60, 60, 60, 0.1);
 }
 .pole-top .cover {
   margin-bottom: -8px;
@@ -139,9 +139,9 @@ body {
   border-right-style: solid;
   border-left-style: solid;
   border-right-width: 6px;
-  border-right-color: rgba(120,120,120,0.1);
+  border-right-color: rgba(120, 120, 120, 0.1);
   border-left-width: 12px;
-  border-left-color: rgba(60,60,60,0.1);
+  border-left-color: rgba(60, 60, 60, 0.1);
 }
 .thin-band {
   width: 82px;
@@ -161,9 +161,9 @@ body {
   border-right-style: solid;
   border-left-style: solid;
   border-right-width: 6px;
-  border-right-color: rgba(120,120,120,0.1);
+  border-right-color: rgba(120, 120, 120, 0.1);
   border-left-width: 12px;
-  border-left-color: rgba(60,60,60,0.1);
+  border-left-color: rgba(60, 60, 60, 0.1);
 }
 .pole-top .thin-band {
   border-radius: 0 0 4px 4px;
@@ -181,7 +181,7 @@ body {
   border: 4px solid #4b4c4d;
   border-top-width: 0;
   border-bottom-width: 0;
-  background-color: rgba(250,250,255,0.5);
+  background-color: rgba(250, 250, 255, 0.5);
 }
 .container:before {
   content: '';
@@ -192,7 +192,13 @@ body {
   right: 15%;
   left: 50%;
   z-index: 15;
-  background-image: linear-gradient(to left, rgba(255,255,255,0.8), rgba(255,255,255,0.8) 33.33%, rgba(255,255,255,0.2) 33.33%, rgba(255,255,255,0.2) 100%);
+  background-image: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.8) 33.33%,
+    rgba(255, 255, 255, 0.2) 33.33%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
 }
 .pole {
   width: -1px;
@@ -203,7 +209,7 @@ body {
   background-size: 100% 88px;
   background-position: 0% 0%;
   -webkit-animation: spin 4s linear infinite;
-          animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
 }
 .pole:before {
   content: '';
@@ -215,15 +221,35 @@ body {
   border-right-style: solid;
   border-left-style: solid;
   border-right-width: 10px;
-  border-right-color: rgba(120,120,120,0.1);
+  border-right-color: rgba(120, 120, 120, 0.1);
   border-left-width: 14px;
-  border-left-color: rgba(60,60,60,0.1);
+  border-left-color: rgba(60, 60, 60, 0.1);
 }
 .mono .pole {
-  background-image: repeating-linear-gradient(-25deg, #fff, #fff 20px, #df5646 20px, #df5646 40px, #fff 40px, #fff 60px, #1c78a4 60px, #1c78a4 80px);
+  background-image: repeating-linear-gradient(
+    -25deg,
+    #fff,
+    #fff 20px,
+    #df5646 20px,
+    #df5646 40px,
+    #fff 40px,
+    #fff 60px,
+    #1c78a4 60px,
+    #1c78a4 80px
+  );
 }
 .vary .pole {
-  background-image: repeating-linear-gradient(-25deg, #fff, #fff 10px, #df5646 10px, #df5646 40px, #fff 40px, #fff 50px, #1c78a4 50px, #1c78a4 80px);
+  background-image: repeating-linear-gradient(
+    -25deg,
+    #fff,
+    #fff 10px,
+    #df5646 10px,
+    #df5646 40px,
+    #fff 40px,
+    #fff 50px,
+    #1c78a4 50px,
+    #1c78a4 80px
+  );
 }
 @-webkit-keyframes spin {
   0% {
