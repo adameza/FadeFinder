@@ -16,8 +16,8 @@ function convertTime(date) {
   let time = new Date(date)
   let hrs = time.getHours()
   let min = time.getMinutes()
-  if (hrs > 12) var post = 'PM'
-  else var post = 'AM'
+  var post = 'AM'
+  if (hrs > 12) post = 'PM'
   hrs = hrs % 12
   if (min < 10) return `${hrs}:0${min} ${post}`
   return `${hrs}:${min} ${post}`

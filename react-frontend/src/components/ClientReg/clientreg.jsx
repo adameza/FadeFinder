@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import Table from './Table'
 // import { getAllBarbers } from '../../BackendRoutes/barber-routes'
 import { addAppointment } from '../../BackendRoutes/appointment-routes'
-import { addClient } from '../../BackendRoutes/client-routes'
 import { getBarberByName } from '../../BackendRoutes/barber-routes'
 
 import { useLocation } from 'react-router-dom'
@@ -52,12 +51,12 @@ export default function ClientRegistration() {
   function handleChange(event) {
     console.log(event)
     console.log(event.value)
-    if (event.id == "clientName") {
+    if (event.id === "clientName") {
       setClient({
         name: event.value,
         email: client['email']
       })
-    } else if (event.id == "clientEmail") {
+    } else if (event.id === "clientEmail") {
       setClient({
         name: client['name'],
         email: event.value
