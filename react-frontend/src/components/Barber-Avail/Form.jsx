@@ -2,37 +2,28 @@ import React, { useState } from 'react'
 import Select from 'react-select'
 import './form.css'
 import TimeRange from 'react-time-range'
-import Calendar from 'react-calendar'
-import 'react-calendar/dist/Calendar.css';
 
 
 function Form(props) {
-  const options = [
-    { value: 'barber_id', label: 'Sun' },
-    { value: 'barber_id', label: 'Mon' },
-    { value: 'barber0_id', label: 'Tue' },
-    { value: 'barber1_id', label: 'Wed' },
-    { value: 'barber1_id', label: 'Thurs' },
-    { value: 'barber1_id', label: 'Fri' },
-    { value: 'barber1_id', label: 'Sat' },
-  ]
 
-  const appoinTimes = [
-    {value: '0', label: '30 Min'},
+  const appointTimes = [
+    {value: '0.5', label: '30 Min'},
     {value: '1', label: '1 Hour'}
   ]
 
-  const [start, setStart] = useState();
-  const [end, setEnd] = useState();
+  const [start, setStart] = useState("2023-03-08T17:00:00.312Z");
+  const [end, setEnd] = useState("2023-03-08T20:00:00.860Z");
   const [date, setDate] = useState(new Date())
   const [checked, setChecked] = useState(false)
-  const [len, setLen] = useState()
+  const [len, setLen] = useState(1)
+  const [recur, setRecur] = useState(0)
 
   const checkChange = () => {
     return setChecked(!checked);
   };
 
   function handleChange(event) {
+    console.log(event)
     if (event.startTime) {
       setStart(event.startTime)
     }
@@ -49,17 +40,55 @@ function Form(props) {
     return dateString.split("T")[0]
   }
 
+  function round(value, precision) {
+    var multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
+  }
+
+  function splitTimes(date0, date1) {
+    let times = []
+    let hourDiff = round((Math.abs(date0 - date1) / 60 / 60 / 1000), 1)
+    console.log(hourDiff)
+    console.log(len.value)
+    let _start = new Date(date0)
+    let _end = new Date(date0)
+    if (len.label === '1 Hour') {
+      console.log("true")
+    }
+    for (let i = 0; i < hourDiff; i+=Number(len.value)) {
+      if (len.label === '1 Hour') {
+        _end.setHours(_start.getHours() + Number(len.value))
+        times.push({startTime: new Date(_start), endTime: new Date(_end)})
+        _start.setHours(_end.getHours())
+      }
+      else {
+        _end.setMinutes(_start.getMinutes() + 30)
+        times.push({startTime: new Date(_start), endTime: new Date(_end)})
+        _start.setMinutes(_end.getMinutes())
+        _start.setHours(_end.getHours())
+      }
+    }
+    console.log(times)
+    return times
+  }
+
   function submitForm() {
     let startTime = getDate(date.toISOString()) + "T" + getTime(start.toString())
     let endTime = getDate(date.toISOString()) + "T" + getTime(end.toString())
-    let hourDiff = (Math.abs(avail['startTime'] - avail['endTime']) / 60 / 60 / 1000)
-    let avail = {startTime: new Date(startTime), endTime: new Date(endTime)}
+    let startDate = new Date(startTime)
+    let endDate = new Date(endTime)
+    let avail = {startTime: startDate, endTime: endDate}
     console.log(avail)
-    console.log((Math.abs(avail['startTime'] - avail['endTime']) / 60 / 60 / 1000))
-    console.log(len)
-    for (let i=0; i < hourDiff; i+=1) {
-      
+    let avail_list = splitTimes(startDate, endDate)
+    let recur_list = []
+    for (let i = 1; i <= recur && checked; i++) {
+      avail_list.forEach((x) => {
+        let _start = new Date(x.startTime).setDate(x.startTime.getDate() + 7 * i)
+        let _end = new Date(x.startTime).setDate(x.endTime.getDate() + 7 * i)
+        recur_list.push({startTime: new Date(_start), endTime: new Date(_end)})
+      })
     }
+    props.handleSubmit(avail_list.concat(recur_list))
 
   }
 
@@ -71,7 +100,7 @@ function Form(props) {
             onChange={(e) => setDate(e.target.valueAsDate)}
           />
       <label>Length of Appointments?
-        <Select options={appoinTimes} onChange={setLen}/>
+        <Select options={appointTimes} onChange={setLen}/>
       </label>
       <label>Time</label>
       <TimeRange onChange={handleChange} startMoment={start} endMoment={end}/>
@@ -79,7 +108,7 @@ function Form(props) {
       <input type="checkbox" value={checked} onChange={checkChange}/>
       Recurring?
       </label>
-      {checked && (<label>How many weeks?<input type="number"/></label>)}
+      {checked && (<label>How many weeks?<input type="number" value={recur} onChange={(e) => setRecur(e.target.valueAsNumber)}/></label>)}
       <input type="button" value="Add" onClick={submitForm} />
     </form>
   )

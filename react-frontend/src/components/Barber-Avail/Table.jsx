@@ -25,13 +25,12 @@ function convertTime(date) {
 
 const getDay = (appDate) => {
   var date = new Date(appDate)
-  date.setDate(date.getDate() + 1)
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat']
-  return days[date.getDay()]
+  return date.getDate().toString()
 }
 
 function TableBody(props) {
   const rows = props.characterData.map((row, index) => {
+    console.log(row)
     const day = getDay(row.startTime)
     const start = convertTime(row.startTime)
     const end = convertTime(row.endTime)
