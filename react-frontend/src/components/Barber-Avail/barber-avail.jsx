@@ -17,8 +17,6 @@ export default function BarberAvailability() {
     getBarberAvail(barberName).then((result) => {
       if (result) {
         setAllAvail(result)
-        console.log(result)
-        console.log('good')
       }
     })
   }, [])

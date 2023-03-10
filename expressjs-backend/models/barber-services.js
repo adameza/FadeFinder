@@ -37,14 +37,16 @@ async function getBarberByName(barber_name) {
   }
 }
 
-async function addAvailability(barber_name, avail) {
+async function addAvailability(barber_name, new_avail_list) {
   try {
     const barberToUpdate = await barberModel.findOne({ name: barber_name })
-    let avail_list = barberToUpdate.availability
-    avail_list.push(avail)
+    let barber_avail_list = barberToUpdate.availability
+    new_avail_list.forEach((avail) => {
+      barber_avail_list.push(avail)
+    })
     const res = await barberModel.updateOne(
       { name: barber_name },
-      { availability: avail_list }
+      { availability: barber_avail_list }
     )
     console.log(res)
     return res
