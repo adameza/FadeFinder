@@ -15,17 +15,26 @@ function TableHeader() {
 function convertTime(date) {
   let time = new Date(date)
   let hrs = time.getHours()
+  console.log(hrs)
+  if (hrs === 0) hrs = 12
   let min = time.getMinutes()
   var post = 'AM'
-  if (hrs > 12) post = 'PM'
-  hrs = hrs % 12
+  if (hrs >= 12) {
+    post = 'PM'
+  }
+  if (hrs > 12) {
+    hrs = hrs % 12
+  }
   if (min < 10) return `${hrs}:0${min} ${post}`
   return `${hrs}:${min} ${post}`
 }
 
 const getDay = (appDate) => {
   var date = new Date(appDate)
-  return date.getDate().toString()
+  let day = date.getDate().toString()
+  let month = date.getMonth().toString()
+  const monthList = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  return monthList[month] + " " + day
 }
 
 function TableBody(props) {

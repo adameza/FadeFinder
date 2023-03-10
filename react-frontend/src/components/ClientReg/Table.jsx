@@ -1,4 +1,22 @@
 import React from 'react'
+import './Table.css'
+
+function convertTime(date) {
+  let time = new Date(date)
+  let hrs = time.getHours()
+  console.log(hrs)
+  if (hrs === 0) hrs = 12
+  let min = time.getMinutes()
+  var post = 'AM'
+  if (hrs >= 12) {
+    post = 'PM'
+  }
+  if (hrs > 12) {
+    hrs = hrs % 12
+  }
+  if (min < 10) return `${hrs}:0${min} ${post}`
+  return `${hrs}:${min} ${post}`
+}
 
 function TableHeader() {
   return (
@@ -14,10 +32,10 @@ function TableBody(props) {
   const rows = props.characterData.map((row, index) => {
     return (
       <tr key={index}>
-        <td>
-          {row.startTime} {row.endTime}
+        <td class='row'>
+          {convertTime(row.startTime)} {convertTime(row.endTime)}
           <div>
-            <button onClick={() => props.schedule(index)}>Schedule</button>
+            <button class="appointSubmit"onClick={() => props.schedule(index)}>Schedule</button>
           </div>
         </td>
       </tr>

@@ -31,18 +31,14 @@ export default function ClientRegistration() {
 
   }
 
-  const getDay = () => {
-    var date = new Date(appDate)
-    date.setDate(date.getDate() + 1)
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat']
-    return days[date.getDay()]
-  }
-
-  const fetchAppointments = () => {
-    let dayName = getDay()
-    console.log(dayName)
+  const fetchAppointments = (selectedDate) => {
+    setAppDate(selectedDate)
+    console.log(barber.availability)
     const dates = barber.availability.filter((avail) => {
-      return avail.day === dayName
+      let tempDate = new Date(avail.startTime)
+      console.log("barber" + tempDate.getDate().toString())
+      console.log("selected" + selectedDate.getDate().toString())
+      return tempDate.getDate() === selectedDate.getDate() + 1
     })
     console.log(dates)
     setAllDates(dates)
@@ -70,7 +66,7 @@ export default function ClientRegistration() {
       <h1>FadeFinder</h1>
 
       <form id="schedule-appointment-form">
-        <h2>Schedule Appointmnet</h2>
+        <h2>Schedule Appointment</h2>
         <div>
           <label>Barber Name: {location.state.popupInfo.name}</label>
         </div>
@@ -98,11 +94,10 @@ export default function ClientRegistration() {
             type="date"
             id="appointment-date"
             name="appointment-date"
-            onChange={(e) => setAppDate(e.target.valueAsDate)}
+            onChange={(e) => fetchAppointments(e.target.valueAsDate)}
           />
         </div>
       </form>
-      <button onClick={fetchAppointments}>Find Appointments</button>
       <h2>Appointments</h2>
       <Table characterData={allDates} schedule={scheduleAppointment}/>
     </div>

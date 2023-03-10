@@ -1,0 +1,9 @@
+td.row {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+button.appointSubmit {
+  margin-left: 10px;
+}
