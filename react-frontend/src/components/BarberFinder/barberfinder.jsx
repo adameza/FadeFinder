@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Map, { Marker, Popup } from 'react-map-gl'
 import { getAllBarbers } from '../../BackendRoutes/barber-routes'
+import { Navbar } from '../navbar/navbar'
 
 import Pin from './pin'
 
@@ -49,6 +50,7 @@ export default function BarberFinder() {
 
   return (
     <div>
+      <Navbar/>
       <Map
         initialViewState={{
           latitude: 40,

@@ -2,15 +2,13 @@ import './App.css'
 import React, { useState, useEffect } from 'react';
 import BarberPole from './components/Home/loading';
 import './components/Home/startupScreenText.css'; // import the CSS file for the startup animation styles
-
-
 import Loading from './components/Home/loading'
-import CustomerLogin from './components/Customer-Login/customer-login'
-import CustomerNew from './components/Customer-Login/customer-new'
-import BarberLogin from './components/Barber-Login/barber-login'
+import CustomerLogin from './components/ClientLogin/client_register'
+import CustomerNew from './components/ClientLogin/client_new'
+import BarberLogin from './components/BarberLogin/barber-login'
 import BarberSelect from './components/BarberSelect/barberselect'
-import BarberAvailability from './components/Barber-Avail/barber-avail'
-import ClientRegistration from './components/ClientReg/clientreg'
+import BarberAvailability from './components/BarberAvail/barber-avail'
+import ClientRegistration from './components/ClientRegister/clientreg'
 import BarberFinder from './components/BarberFinder/barberfinder'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 

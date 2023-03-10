@@ -22,7 +22,7 @@ function TableHeader() {
   return (
     <thead>
       <tr>
-        <th>Appointment Time</th>
+        <th>Time</th>
       </tr>
     </thead>
   )
@@ -33,7 +33,7 @@ function TableBody(props) {
     return (
       <tr key={index}>
         <td class='row'>
-          {convertTime(row.startTime)} {convertTime(row.endTime)}
+          {convertTime(row.startTime)}-{convertTime(row.endTime)}
           <div>
             <button class="appointSubmit"onClick={() => props.schedule(index)}>Schedule</button>
           </div>

@@ -4,7 +4,7 @@ import Table from './Table'
 // import { getAllBarbers } from '../../BackendRoutes/barber-routes'
 import { addAppointment } from '../../BackendRoutes/appointment-routes'
 import { getBarberByName } from '../../BackendRoutes/barber-routes'
-
+import { Navbar } from '../navbar/navbar'
 import { useLocation } from 'react-router-dom'
 
 export default function ClientRegistration() {
@@ -62,16 +62,14 @@ export default function ClientRegistration() {
 
   return (
     <div>
-      <title>FadeFinder</title>
-      <h1>FadeFinder</h1>
-
+      <Navbar />
       <form id="schedule-appointment-form">
-        <h2>Schedule Appointment</h2>
+        <h2 class='sched_title'>Schedule Appointment</h2>
         <div>
           <label>Barber Name: {location.state.popupInfo.name}</label>
         </div>
         <div>
-          <label>Client Name:</label>
+          <label>Name:</label>
           <input type="text"
                  id="clientName"
                  name="clientName"
@@ -80,7 +78,7 @@ export default function ClientRegistration() {
         </div>
 
         <div>
-          <label>Client Email:</label>
+          <label>Email:</label>
           <input type="email"
                  id="clientEmail"
                 name="clientEmail"
