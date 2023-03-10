@@ -10,6 +10,7 @@ import BARBERS from './barbers.json'
 
 const TOKEN =
   'pk.eyJ1IjoibGR1a2ljIiwiYSI6ImNsZWx2aXkwdDBmOTAzeW96d3V5YWIzd3kifQ.RwD-huz-ONdzVHqJcpYRzg'
+console.log(TOKEN)
 
 export default function BarberFinder() {
   const [popupInfo, setPopupInfo] = useState(null)
