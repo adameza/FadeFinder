@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import makeClientPost from '../../BackendRoutes/client-routes'
+import { addClient } from '../../BackendRoutes/client-routes'
 
 export default function CustomerLogin() {
   const [fullname, setFullname] = useState('')
@@ -10,7 +10,7 @@ export default function CustomerLogin() {
     if (fullname.trim() && email.trim()) {
       e.preventDefault()
       let newClient = { name: fullname, email: email }
-      makeClientPost(newClient)
+      addClient(newClient)
       console.log({ fullname, email })
       setFullname('')
       setEmail('')

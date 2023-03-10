@@ -62,9 +62,9 @@ app.get('/barbers/:name', async (req, res) => {
 })
 
 app.post('/barbers/:name/avail', async (req, res) => {
-  const avail = req.body
+  const avail_list = req.body
   const barberName = req.params['name']
-  const result = await barberServices.addAvailability(barberName, avail)
+  const result = await barberServices.addAvailability(barberName, avail_list)
   if (result) res.status(201).send(result)
   else res.status(500).send(result)
 })
