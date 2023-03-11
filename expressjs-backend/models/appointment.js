@@ -9,18 +9,13 @@ const AppointmentSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    location: {
-      type: String,
-      required: true,
-      trim: true,
-    },
     client: {
-      type: Number,
+      type: mongoose.Schema.Types.Mixed,
       required: true,
       trim: false,
     },
     barber: {
-      type: Number,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       trim: false,
     },

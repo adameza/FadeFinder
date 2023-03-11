@@ -1,3 +1,7 @@
+body {
+  background-color: #FBFBFF;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -70,7 +74,7 @@ td {
 }
 
 th {
-  background-color: #4caf50;
+  background-color: #9191E9;
   color: white;
 }
 

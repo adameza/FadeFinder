@@ -7,8 +7,10 @@ const BarberSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    availability: [{ day: String, startTime: String }],
-    regularClients: [Number],
+    availability: [{ startTime: Date, endTime: Date }],
+    appointments: [ { type: mongoose.Types.ObjectId } ],
+    lat: { type: Number },
+    lon: { type: Number },
   },
   { collection: 'barbers' }
 )

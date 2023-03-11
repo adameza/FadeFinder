@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Navbar } from '../navbar/navbar'
+
 
 export default function CustomerLogin() {
   const [username, setUsername] = useState('')
@@ -16,6 +18,7 @@ export default function CustomerLogin() {
 
   return (
     <main className="login">
+      <Navbar />
       <form className="login__form" onSubmit={handleSubmit}>
         <h2 className="login__title">Customer Login</h2>
         <label htmlFor="username">Username</label>
