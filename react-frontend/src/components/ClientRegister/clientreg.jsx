@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Table from './Table'
 // import { getAllBarbers } from '../../BackendRoutes/barber-routes'
 import { addAppointment } from '../../BackendRoutes/appointment-routes'
-import { getBarberByName } from '../../BackendRoutes/barber-routes'
+import { getBarberByName, deleteBarberAvail} from '../../BackendRoutes/barber-routes'
 import { Navbar } from '../navbar/navbar'
 import { useLocation } from 'react-router-dom'
 
@@ -22,11 +22,16 @@ export default function ClientRegistration() {
     console.log(client)
     getBarberByName(barber.name).then((barberRes) => {
       console.log(barberRes)
-      const appoint = {date: appDate,
+      const appoint = {
+        date: allDates[index],
         client: client,
-        barber: barberRes.barber._id}
+        barber_id: barberRes.barber._id}
       console.log(appoint)
-      addAppointment(appoint)
+      // addAppointment(appoint).then((result) =>{
+      //   if (result) {
+      //     deleteBarberAvail(barberRes.barber.name, allDates[index])
+      //   }
+      // })
     })
 
   }
@@ -96,7 +101,7 @@ export default function ClientRegistration() {
           />
         </div>
       </form>
-      <h2>Appointments</h2>
+      <h2>Availablity</h2>
       <Table characterData={allDates} schedule={scheduleAppointment}/>
     </div>
   )

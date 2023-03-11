@@ -5,16 +5,15 @@ const mongoose = require('mongoose')
 const AppointmentSchema = new mongoose.Schema(
   {
     date: {
-      type: Date,
-      required: true,
-      trim: true,
+      startTime: Date,
+      endTime: Date
     },
     client: {
       type: mongoose.Schema.Types.Mixed,
       required: true,
       trim: false,
     },
-    barber: {
+    barber_id: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       trim: false,

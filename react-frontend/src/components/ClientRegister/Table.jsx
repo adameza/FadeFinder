@@ -1,4 +1,4 @@
-import React from 'react'
+import { React, useState } from 'react'
 import './Table.css'
 
 function convertTime(date) {
@@ -27,6 +27,7 @@ function TableHeader() {
     </thead>
   )
 }
+
 
 function TableBody(props) {
   const rows = props.characterData.map((row, index) => {
