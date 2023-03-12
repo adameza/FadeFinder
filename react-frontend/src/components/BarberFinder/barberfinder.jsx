@@ -6,16 +6,28 @@ import { useNavigate } from 'react-router-dom'
 import Map, { Marker, Popup } from 'react-map-gl'
 import { getAllBarbers } from '../../BackendRoutes/barber-routes'
 import { Navbar } from '../navbar/navbar'
+import { BarberPopUp } from './popup'
 
 import Pin from './pin'
 
 const TOKEN =
   'pk.eyJ1IjoibGR1a2ljIiwiYSI6ImNsZWx2aXkwdDBmOTAzeW96d3V5YWIzd3kifQ.RwD-huz-ONdzVHqJcpYRzg'
+console.log(TOKEN)
 
 export default function BarberFinder() {
   const [popupInfo, setPopupInfo] = useState(null)
   const [barbers, setBarbers] = useState([])
-  //   const [pins, setPins] = useState(null)
+
+  const [viewport, setViewport] = useState();
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      setViewport({
+        ...viewport,
+        latitude: pos.coords.latitude,
+        longitude: pos.coords.longitude
+      });
+    });
+  }, []);
 
   const navigate = useNavigate()
   const toClientReg = () => {
@@ -48,42 +60,37 @@ export default function BarberFinder() {
     ))
   }
 
+  console.log(viewport)
+
   return (
     <div>
-      <Navbar/>
-      <Map
-        initialViewState={{
-          latitude: 40,
-          longitude: -100,
-          zoom: 3.5,
-        }}
-        mapStyle="mapbox://styles/mapbox/streets-v12"
-        mapboxAccessToken={TOKEN}
-        style={{ width: '100vw', height: '100vh' }}
-      >
-        <BarberPins />
+      <Navbar />
+      {viewport &&
+        <Map
+          initialViewState={{
+            latitude: viewport.latitude,
+            longitude: viewport.longitude,
+            zoom: 13.5
+          }}
+          mapStyle="mapbox://styles/mapbox/streets-v12"
+          mapboxAccessToken={TOKEN}
+          style={{ width: '100vw', height: '100vh' }}
+        >
+          <BarberPins />
 
-        {popupInfo && (
-          <Popup
-            anchor="top"
-            closeButton={false}
-            longitude={Number(popupInfo.lon)}
-            latitude={Number(popupInfo.lat)}
-            onClose={() => setPopupInfo(null)}
-          >
-            <div class="popup">
-              {popupInfo.name}
-              <button
-                onClick={() => {
-                  toClientReg()
-                }}
-              >
-                Schedule This Barber
-              </button>
-            </div>
-          </Popup>
-        )}
-      </Map>
-    </div>
+          {popupInfo && (
+            <Popup
+              anchor="top"
+              closeButton={false}
+              longitude={Number(popupInfo.lon)}
+              latitude={Number(popupInfo.lat)}
+              onClose={() => setPopupInfo(null)}
+            >
+              <BarberPopUp barber={popupInfo} reroute={toClientReg}/>
+            </Popup>
+          )}
+        </Map>
+      }
+    </div >
   )
 }
