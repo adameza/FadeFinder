@@ -4,7 +4,6 @@ import './Table.css'
 function convertTime(date) {
   let time = new Date(date)
   let hrs = time.getHours()
-  console.log(hrs)
   if (hrs === 0) hrs = 12
   let min = time.getMinutes()
   var post = 'AM'
@@ -28,7 +27,6 @@ function TableHeader() {
   )
 }
 
-
 function TableBody(props) {
   const rows = props.characterData.map((row, index) => {
     return (
@@ -36,7 +34,7 @@ function TableBody(props) {
         <td class='row'>
           {convertTime(row.startTime)}-{convertTime(row.endTime)}
           <div>
-            <button class="appointSubmit"onClick={() => props.schedule(index)}>Schedule</button>
+            <button class="appointSubmit"onClick={() => props.setVisible(index)}>Schedule</button>
           </div>
         </td>
       </tr>
@@ -49,7 +47,7 @@ function Table(props) {
   return (
     <table>
       <TableHeader />
-      <TableBody characterData={props.characterData} schedule={props.schedule}/>
+      <TableBody characterData={props.characterData} setVisible={props.setVisible}/>
     </table>
   )
 }

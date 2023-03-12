@@ -71,7 +71,7 @@ export default function BarberFinder() {
             latitude={Number(popupInfo.lat)}
             onClose={() => setPopupInfo(null)}
           >
-            <div>
+            <div class="popup">
               {popupInfo.name}
               <button
                 onClick={() => {
