@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import Map, { Marker, Popup } from 'react-map-gl'
 import { getAllBarbers } from '../../BackendRoutes/barber-routes'
 import { Navbar } from '../navbar/navbar'
+import { BarberPopUp } from './popup'
 
 import Pin from './pin'
 
@@ -85,16 +86,7 @@ export default function BarberFinder() {
               latitude={Number(popupInfo.lat)}
               onClose={() => setPopupInfo(null)}
             >
-              <div>
-                {popupInfo.name}
-                <button
-                  onClick={() => {
-                    toClientReg()
-                  }}
-                >
-                  Schedule This Barber
-                </button>
-              </div>
+              <BarberPopUp barber={popupInfo} reroute={toClientReg}/>
             </Popup>
           )}
         </Map>

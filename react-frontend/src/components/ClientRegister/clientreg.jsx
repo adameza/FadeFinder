@@ -3,13 +3,19 @@ import React, { useState } from 'react'
 import Table from './Table'
 // import { getAllBarbers } from '../../BackendRoutes/barber-routes'
 import { addAppointment } from '../../BackendRoutes/appointment-routes'
-import { getBarberByName } from '../../BackendRoutes/barber-routes'
+import { getBarberByName, deleteBarberAvail} from '../../BackendRoutes/barber-routes'
 import { Navbar } from '../navbar/navbar'
 import { useLocation } from 'react-router-dom'
+import {ConfirmDialog} from 'primereact/confirmdialog'
+import { Button } from 'primereact/button'
+import { confirmDialog } from 'primereact/confirmdialog'; // For confirmDialog method
 
 export default function ClientRegistration() {
+  const [selectedAvail, setSelectedAvail] = useState({startTime: null,endTime: null, _id: null})
   const [appDate, setAppDate] = useState('')
   const [allDates, setAllDates] = useState([])
+  const [visible, setVisible] = useState(false)
+  const [message, setMessage] = useState("")
   const [client, setClient] = useState({
     name: '',
     email: ''
@@ -20,13 +26,19 @@ export default function ClientRegistration() {
 
   const scheduleAppointment = (index) => {
     console.log(client)
+    const newAppoint = {startTime: selectedAvail.startTime, endTime: selectedAvail.endTime, _id: selectedAvail._id} 
     getBarberByName(barber.name).then((barberRes) => {
       console.log(barberRes)
-      const appoint = {date: appDate,
+      const appoint = {
+        date: newAppoint,
         client: client,
-        barber: barberRes.barber._id}
+        barber_id: barberRes.barber._id}
       console.log(appoint)
-      addAppointment(appoint)
+      // addAppointment(appoint).then((result) =>{
+      //   if (result) {
+      //     deleteBarberAvail(barberRes.barber.name, newAppoint)
+      //   }
+      // })
     })
 
   }
@@ -59,6 +71,39 @@ export default function ClientRegistration() {
       })
     }
   }
+
+  function convertTime(date) {
+    let time = new Date(date)
+    let hrs = time.getHours()
+    if (hrs === 0) hrs = 12
+    let min = time.getMinutes()
+    var post = 'AM'
+    if (hrs >= 12) {
+      post = 'PM'
+    }
+    if (hrs > 12) {
+      hrs = hrs % 12
+    }
+    if (min < 10) return `${hrs}:0${min} ${post}`
+    return `${hrs}:${min} ${post}`
+  }
+
+  function createMessage() {
+    const barberInfo = "Your barber is " + barber.name + ".\n"
+    const locationInfo = "Located at " + String(barber.lon) + " and " + String(barber.lat) + ".\n"
+    const appointInfo = "Your appointment starts at " + convertTime(selectedAvail.startTime) + " and ends at " +  convertTime(selectedAvail.endTime) + ". Click \"Yes\" to confirm appointment."
+    return (barberInfo + locationInfo + appointInfo)
+  }
+
+  function confirmation(index) {
+    setSelectedAvail({startTime: allDates[index].startTime, endTime: allDates[index].endTime, _id: allDates[index]._id})
+    if (client.name != "" && client.email != "") {
+      setVisible(true)
+    }
+  }
+
+
+  
 
   return (
     <div>
@@ -96,8 +141,10 @@ export default function ClientRegistration() {
           />
         </div>
       </form>
-      <h2>Appointments</h2>
-      <Table characterData={allDates} schedule={scheduleAppointment}/>
+      <h2>Availablity</h2>
+      <Table class="Table" characterData={allDates} setVisible={confirmation}/>
+      <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message={createMessage()} accept={scheduleAppointment}
+          header="Appointment Confirmation" icon="pi pi-exclamation-triangle" />
     </div>
   )
 }

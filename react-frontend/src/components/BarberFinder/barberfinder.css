@@ -1,3 +1,9 @@
+.popup {
+  display: flex;
+  flex-direction: row;
+}
+
+
 /**
    * Buttons
    */

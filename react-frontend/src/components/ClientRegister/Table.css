@@ -4,6 +4,15 @@ td.row {
   flex-direction: row;
 }
 
-button.appointSubmit {
+tr:hover {background-color: #E49273;}
+
+tr button.appointSubmit {
   margin-left: 10px;
+  background-color: #9191E9;
+  border-color: black;
+  display: none;
+}
+
+tr:hover button.appointSubmit {
+  display: initial;
 }
