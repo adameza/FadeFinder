@@ -28,6 +28,12 @@
   width: 20px;
 }
 
+.signin {
+  justify-content: right;
+  margin-top: 8px;
+  margin-left: 1200px;
+}
+
 #navlink {
   padding-right: 20px;
   padding-left: 20px;

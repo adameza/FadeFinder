@@ -7,6 +7,21 @@ const BarberSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    bio: {
+      type: String,
+      required: false,
+      trim: true,
+    },
+    imgPath: {
+      type: String,
+      required: false,
+      trim: true,
+    },
     availability: [{ startTime: Date, endTime: Date }],
     appointments: [ { type: mongoose.Types.ObjectId } ],
     lat: { type: Number },

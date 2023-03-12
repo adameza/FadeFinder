@@ -3,13 +3,11 @@ import React, { useState, useEffect } from 'react';
 import BarberPole from './components/Home/loading';
 import './components/Home/startupScreenText.css'; // import the CSS file for the startup animation styles
 import Loading from './components/Home/loading'
-import CustomerLogin from './components/ClientLogin/client_register'
-import CustomerNew from './components/ClientLogin/client_new'
-import BarberLogin from './components/BarberLogin/barber-login'
-import BarberSelect from './components/BarberSelect/barberselect'
 import BarberAvailability from './components/BarberAvail/barber-avail'
 import ClientRegistration from './components/ClientRegister/clientreg'
 import BarberFinder from './components/BarberFinder/barberfinder'
+import BarberDashboard from './components/BarberDashboard/barber_dash';
+import BarberRegistration from './components/BarberRegistration/barber_reg';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -30,12 +28,10 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/loading" element={<Loading />} />
-            <Route path="/customerlogin" element={<CustomerLogin />} />
-            <Route path="/customerlogin/new" element={<CustomerNew />} />
-            <Route path="/barberlogin" element={<BarberLogin />} />
-            <Route path="/barberselect" element={<BarberSelect />} />
             <Route path="/clientreg" element={<ClientRegistration />} />
             <Route path="/barberavail" element={<BarberAvailability />} />
+            <Route path="/barber/dashboard" element={<BarberDashboard />} />
+            <Route path="/barber/register" element={<BarberRegistration />} />
             <Route path="/" element={<BarberFinder />} />
           </Routes>
         </BrowserRouter>}

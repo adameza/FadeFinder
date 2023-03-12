@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-export default function BarberLogin() {
+export default function BarberDashboard() {
   const [username, setUsername] = useState('')
 
   const handleSubmit = (e) => {
@@ -15,7 +15,7 @@ export default function BarberLogin() {
   return (
     <main className="login">
       <form className="login__form" onSubmit={handleSubmit}>
-        <h2 className="login__title">Barber Login</h2>
+        <h2 className="login__title">Barber DashBoard</h2>
         <label htmlFor="username">Username</label>
         <input
           id="username"

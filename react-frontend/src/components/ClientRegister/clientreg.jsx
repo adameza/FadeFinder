@@ -1,14 +1,11 @@
 import './clientreg.css'
 import React, { useState } from 'react'
 import Table from './Table'
-// import { getAllBarbers } from '../../BackendRoutes/barber-routes'
 import { addAppointment } from '../../BackendRoutes/appointment-routes'
-import { getBarberByName, deleteBarberAvail} from '../../BackendRoutes/barber-routes'
+import { getBarberByName } from '../../BackendRoutes/barber-routes'
 import { Navbar } from '../navbar/navbar'
 import { useLocation } from 'react-router-dom'
 import {ConfirmDialog} from 'primereact/confirmdialog'
-import { Button } from 'primereact/button'
-import { confirmDialog } from 'primereact/confirmdialog'; // For confirmDialog method
 
 export default function ClientRegistration() {
   const [selectedAvail, setSelectedAvail] = useState({startTime: null,endTime: null, _id: null})

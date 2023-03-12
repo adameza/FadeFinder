@@ -10,6 +10,7 @@ const port = 5000
 const clientServices = require('./models/client-services')
 const barberServices = require('./models/barber-services')
 const appointmentServices = require('./models/appointment-services')
+const utils = require ('./oauth_utils');
 
 app.use(cors())
 app.use(express.json())
@@ -51,8 +52,8 @@ app.get('/barbers', async (req, res) => {
   }
 })
 
-app.get('/barbers/:name', async (req, res) => {
-  const barberName = req.params['name']
+app.get('/barbers/name', async (req, res) => {
+  const barberName = req.body
   const result = await barberServices.getBarberByName(barberName)
   if (result === undefined || result === null)
     res.status(404).send('Resource not found.')
