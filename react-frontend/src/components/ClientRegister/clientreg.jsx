@@ -87,7 +87,7 @@ export default function ClientRegistration() {
 
   function createMessage() {
     const barberInfo = "Your barber is " + barber.name + ".\n"
-    const locationInfo = "Located at " + String(barber.lon) + " and " + String(barber.lat) + ".\n"
+    const locationInfo = "Located at " + barber.address + ".\n"
     const appointInfo = "Your appointment starts at " + convertTime(selectedAvail.startTime) + " and ends at " +  convertTime(selectedAvail.endTime) + ". Click \"Yes\" to confirm appointment."
     return (barberInfo + locationInfo + appointInfo)
   }
@@ -117,6 +117,7 @@ export default function ClientRegistration() {
                  name="clientName"
                  value={client.name}
                  onChange={(e) => handleChange(e.target)} />
+          {client.name == "" && <p id="error">Please enter your name</p>}
         </div>
 
         <div>
@@ -127,6 +128,7 @@ export default function ClientRegistration() {
                 value={client.email}
                 onChange={(e) => handleChange(e.target)}
                 />
+          {client.email == "" && <p id="error">Please enter your email</p>}
         </div>
         <div>
           <label>Appointment Date:</label>

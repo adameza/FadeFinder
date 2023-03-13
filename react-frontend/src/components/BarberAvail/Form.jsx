@@ -47,7 +47,7 @@ function Form(props) {
 
   function splitTimes(date0, date1) {
     let times = []
-    let hourDiff = round((Math.abs(date0 - date1) / 60 / 60 / 1000), 1)
+    let hourDiff = round((Math.abs(date0.getHours() - date1.getHours())))
     console.log(hourDiff)
     console.log(len.value)
     let _start = new Date(date0)
@@ -77,6 +77,7 @@ function Form(props) {
     let endTime = getDate(date.toISOString()) + "T" + getTime(end.toString())
     let startDate = new Date(startTime)
     let endDate = new Date(endTime)
+    console.log(endDate.getTimezoneOffset())
     let avail = {startTime: startDate, endTime: endDate}
     console.log(avail)
     let avail_list = splitTimes(startDate, endDate)
@@ -88,7 +89,7 @@ function Form(props) {
         recur_list.push({startTime: new Date(_start), endTime: new Date(_end)})
       })
     }
-    props.handleSubmit(avail_list.concat(recur_list))
+    // props.handleSubmit(avail_list.concat(recur_list))
 
   }
 

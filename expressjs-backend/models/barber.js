@@ -12,6 +12,11 @@ const BarberSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    address: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     bio: {
       type: String,
       required: false,

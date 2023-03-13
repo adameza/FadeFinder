@@ -16,7 +16,7 @@ export default function BarberAvailability() {
   const [allAvail, setAllAvail] = useState([])
   const location = useLocation()
   console.log(location)
-  const barber = location.state.barberRes.barber
+  const barber = location.state
 
   useEffect(() => {
     getBarberAvail(barber.name).then((result) => {
@@ -30,7 +30,7 @@ export default function BarberAvailability() {
     addBarberAvail(barber.name, avail).then((result) => {
       if (result) {
         console.log(avail)
-        setAllAvail(result)
+        setAllAvail(allAvail.concat(avail))
       }
     })
   }
@@ -50,9 +50,12 @@ export default function BarberAvailability() {
 
   return (
     <div>
-      < Navbar class="navbar"/>
-      <Table characterData={allAvail} removeCharacter={removeOneCharacter} />
-      <Form handleSubmit={updateList} />
+      <div class='availability'>
+        < Navbar class="navbar"/>
+        <h2>Set Availability</h2>
+        <Table characterData={allAvail} removeCharacter={removeOneCharacter} />
+        <Form handleSubmit={updateList} />
+      </div>
     </div>
   )
 }

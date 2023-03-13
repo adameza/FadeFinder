@@ -15,59 +15,50 @@ export default function BarberRegistration() {
   const [pinBio, setPinBio] = useState("")
   const [imPath, setImPath] = useState("")
   const [badAddr, setBadAddr] = useState(false)
-  const [address, setAddress] = useState("Old Slo BBQ, San Luis Obispo")
-  const [lati, setLat] = useState(0)
-  const [long, setLon] = useState(0)
+  const [addr, setAddr] = useState("Old Slo BBQ, San Luis Obispo")
+  const [lati, setLat] = useState(0.0)
+  const [long, setLon] = useState(0.0)
   const location = useLocation()
   const user = location.state.oAuthRes
   const navigate = useNavigate()
 
-  function geolocate() {
-    const myAddr = address
+  function submit() {
+    const myAddr = addr
     console.log(myAddr)
     Geocode.fromAddress(myAddr).then(
       (response) => {
         const geolat = response.results[0].geometry.location.lat;
         const geolng = response.results[0].geometry.location.lng;
-        setLat(geolat)
-        setLon(geolng)
-        console.log({lati, long})
-        setBadAddr(false)
-        return true
+        if (imPath.length !== 0 && pinBio.length !== 0 && geolat != 0 && geolng != 0) {
+          const newName = String(user.name)
+          const newEmail = String(user.email)
+          const Barber = {name: newName,
+                          email: newEmail,
+                          address: addr,
+                          bio: pinBio,
+                          imgPath: imPath,
+                          availability: [],
+                          appointments: [],
+                          lat: geolat,
+                          lon: geolng,
+                          }
+          console.log(Barber)
+          addBarber(Barber).then((res) => {
+            console.log(res)
+            navigate('/barber/availability', { state: Barber })
+          }).catch((error) => {
+            console.log(error)
+          })
+        }
+        else {
+          console.log("bad")
+        }
       },
       (error) => {
         console.error(error);
         setBadAddr(true)
-        return false
       }
     );
-  }
-
-  function submit() {
-    geolocate()
-    if (!badAddr && imPath.length !== 0 && pinBio.length !== 0) {
-      const newName = String(user.name)
-      const newEmail = String(user.email)
-      const Barber = {name: newName,
-                      email: newEmail,
-                      bio: pinBio,
-                      imgPath: imPath,
-                      availability: [],
-                      appointments: [],
-                      lat: lati,
-                      lon: long,
-                      }
-      console.log(Barber)
-      addBarber(Barber).then((res) => {
-        console.log(res)
-        navigate('/barber/dashboard', { state: { Barber } })
-      }).catch((error) => {
-        console.log(error)
-      })
-    }
-    else {
-      console.log("bad")
-    }
   }
 
   return (
@@ -83,7 +74,7 @@ export default function BarberRegistration() {
           <label id="location_label">Location</label>
           <input type="textarea" 
           name="location_input"
-          onChange={(e) => {setAddress(e.target.value)}}
+          onChange={(e) => {setAddr(e.target.value)}}
           />
           {badAddr && <p class="error">Enter a valid address</p>}
         </div>
@@ -97,7 +88,7 @@ export default function BarberRegistration() {
         </div>
         {pinBio.length === 0 && <p class="error">Enter a bio</p>}
         <div class="impath">
-          <label id="impath_label">Path to profile pic</label>
+          <label id="impath_label">Name of profile pic</label>
           <input type="textarea" 
           name="impath_input"
           onChange={(e) => {setImPath(e.target.value)}}

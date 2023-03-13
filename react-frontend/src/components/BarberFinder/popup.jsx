@@ -8,7 +8,7 @@ export function BarberPopUp(props) {
         <div>
             <div class="header">
                 <img class="barber_pic" src={require(`${ baseurl + props.barber.imgPath }`)}/>
-                <h3>{props.barber.name}</h3>
+                <h3 id="head_name">{props.barber.name}</h3>
             </div>
             <p>{props.barber.bio}</p>
             <button onClick={() => {props.reroute()}}>

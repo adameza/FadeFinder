@@ -18,7 +18,7 @@ export function Navbar(){
       getBarberByNameAndEmail({name: oAuthRes.name, email: oAuthRes.email}).then((barberRes) => {
         if (barberRes.status != 404 && barberRes.barber !== false) {
           console.log(barberRes)
-          navigate('/barber/availability', { state: { barberRes } })
+          navigate('/barber/availability', { state: barberRes.barber })
         }
         else
           navigate('/barber/register', { state: { oAuthRes } })
