@@ -32,6 +32,8 @@ export default function BarberAvailability() {
         console.log(avail)
         setAllAvail(allAvail.concat(avail))
       }
+    }).catch((error) => {
+      console.log(error)
     })
   }
 

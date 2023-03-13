@@ -89,7 +89,7 @@ function Form(props) {
         recur_list.push({startTime: new Date(_start), endTime: new Date(_end)})
       })
     }
-    // props.handleSubmit(avail_list.concat(recur_list))
+    props.handleSubmit(avail_list.concat(recur_list))
 
   }
 
