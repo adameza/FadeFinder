@@ -29,6 +29,7 @@ async function addBarber(barber) {
 
 async function getBarberByName(barber_name) {
   try {
+    console.log(barber_name)
     const barber = await barberModel.findOne({ name: barber_name })
     return barber
   } catch (error) {

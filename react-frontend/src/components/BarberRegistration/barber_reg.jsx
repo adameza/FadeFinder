@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Navbar } from '../navbar/navbar'
 import { useLocation } from 'react-router-dom'
 import Geocode from "react-geocode";
@@ -20,6 +20,7 @@ export default function BarberRegistration() {
   const [long, setLon] = useState(0)
   const location = useLocation()
   const user = location.state.oAuthRes
+  const navigate = useNavigate()
 
   function geolocate() {
     const myAddr = address
@@ -45,16 +46,24 @@ export default function BarberRegistration() {
   function submit() {
     geolocate()
     if (!badAddr && imPath.length !== 0 && pinBio.length !== 0) {
-      const Barber = {name: user.name,
-                      email: user.email,
+      const newName = String(user.name)
+      const newEmail = String(user.email)
+      const Barber = {name: newName,
+                      email: newEmail,
                       bio: pinBio,
                       imgPath: imPath,
                       availability: [],
                       appointments: [],
                       lat: lati,
-                      lon: long
+                      lon: long,
                       }
       console.log(Barber)
+      addBarber(Barber).then((res) => {
+        console.log(res)
+        navigate('/barber/dashboard', { state: { Barber } })
+      }).catch((error) => {
+        console.log(error)
+      })
     }
     else {
       console.log("bad")
@@ -77,13 +86,12 @@ export default function BarberRegistration() {
           onChange={(e) => {setAddress(e.target.value)}}
           />
           {badAddr && <p class="error">Enter a valid address</p>}
-          {/* <button className="geobutton" onClick={geolocate}>Geolocate</button> */}
         </div>
         <div class="pinbio">
           <label id="pinbio_label">Pin Bio (shows on map)</label>
           <input type="textarea" 
           name="pinbio_input"
-          maxlength="150"
+          maxLength="150"
           onChange={(e) => {setPinBio(e.target.value)}}
           />
         </div>

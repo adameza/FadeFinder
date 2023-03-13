@@ -68,6 +68,16 @@ export async function getBarberByName(barberName) {
   }
 }
 
+export async function getBarberByNameAndEmail(barber) {
+  try {
+    const response = await axios.get('http://localhost:5000/barbers/'.concat(barber.name + "/" + barber.email))
+    return response.data
+  } catch (error) {
+    console.log(error.response)
+    return error.response
+  }
+}
+
 // export async function getBarberByProfile(barberName) {
 //   try {
 //     const response = await axios.get('http://localhost:5000/barbers', barberName)

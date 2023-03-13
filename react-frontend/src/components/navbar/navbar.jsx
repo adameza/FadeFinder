@@ -5,7 +5,7 @@ import barbershop_pole from './small_pole.png'
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios'
 import { getBarberOAuth } from '../../BackendRoutes/oauth';
-import { getBarberByName } from '../../BackendRoutes/barber-routes';
+import { getBarberByNameAndEmail } from '../../BackendRoutes/barber-routes';
 
 export function Navbar(){
   const [profile, setProfile] = useState()
@@ -14,10 +14,12 @@ export function Navbar(){
   const toBarberDash = (user) => {
     getBarberOAuth(user).then((oAuthRes) => {
       setProfile({name: oAuthRes.name, email: oAuthRes.email})
-      console.log(oAuthRes.name)
-      getBarberByName(oAuthRes.name).then((barberRes) => {
-        if (barberRes.barber !== false) 
-          navigate('/barber/dashboard', { state: { barberRes } })
+      console.log( {name: oAuthRes.name, email: oAuthRes.email} )
+      getBarberByNameAndEmail({name: oAuthRes.name, email: oAuthRes.email}).then((barberRes) => {
+        if (barberRes.status != 404 && barberRes.barber !== false) {
+          console.log(barberRes)
+          navigate('/barber/availability', { state: { barberRes } })
+        }
         else
           navigate('/barber/register', { state: { oAuthRes } })
       }).catch((error) => {

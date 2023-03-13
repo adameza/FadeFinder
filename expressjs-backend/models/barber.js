@@ -27,7 +27,7 @@ const BarberSchema = new mongoose.Schema(
     lat: { type: Number },
     lon: { type: Number },
   },
-  { collection: 'barbers' }
+  { collection: 'barbers' },
 )
 
 const Barber = mongoose.model('Barber', BarberSchema)

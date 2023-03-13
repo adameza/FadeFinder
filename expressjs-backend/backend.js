@@ -52,9 +52,29 @@ app.get('/barbers', async (req, res) => {
   }
 })
 
-app.get('/barbers/name', async (req, res) => {
-  const barberName = req.body
+app.get('/barbers/:name', async (req, res) => {
+  const barberName = req.params['name']
   const result = await barberServices.getBarberByName(barberName)
+  if (result === undefined || result === null)
+    res.status(404).send('Resource not found.')
+  else {
+    res.send({ barber: result })
+  }
+})
+
+app.get('/barbers/:name/:email', async (req, res) => {
+  const targetName = req.params['name']
+  const targetEmail = req.params['email']
+  const all_barbers = await barberServices.getBarbers()
+  console.log(all_barbers)
+  console.log(targetName)
+  console.log(targetEmail)
+  let result = undefined
+  all_barbers.forEach((barber) => {
+    if (barber.name === targetName && barber.email === targetEmail) {
+      result = barber
+    }
+  })
   if (result === undefined || result === null)
     res.status(404).send('Resource not found.')
   else {

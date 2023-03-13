@@ -38,6 +38,7 @@ const getDay = (appDate) => {
 }
 
 function TableBody(props) {
+  console.log(props.characterData)
   const rows = props.characterData.map((row, index) => {
     console.log(row)
     const day = getDay(row.startTime)

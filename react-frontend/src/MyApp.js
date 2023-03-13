@@ -29,7 +29,7 @@ function App() {
           <Routes>
             <Route path="/loading" element={<Loading />} />
             <Route path="/clientreg" element={<ClientRegistration />} />
-            <Route path="/barberavail" element={<BarberAvailability />} />
+            <Route path="/barber/availability" element={<BarberAvailability />} />
             <Route path="/barber/dashboard" element={<BarberDashboard />} />
             <Route path="/barber/register" element={<BarberRegistration />} />
             <Route path="/" element={<BarberFinder />} />

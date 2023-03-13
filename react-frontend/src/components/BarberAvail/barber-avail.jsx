@@ -1,4 +1,7 @@
 import { React, useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import { Navbar } from '../navbar/navbar'
+
 import './barber-avail.css'
 import Form from './Form'
 import Table from './Table'
@@ -8,13 +11,15 @@ import {
   deleteBarberAvail,
 } from '../../BackendRoutes/barber-routes'
 
+
 export default function BarberAvailability() {
   const [allAvail, setAllAvail] = useState([])
-  const queryParameters = new URLSearchParams(window.location.search)
-  const barberName = queryParameters.get('name')
+  const location = useLocation()
+  console.log(location)
+  const barber = location.state.barberRes.barber
 
   useEffect(() => {
-    getBarberAvail(barberName).then((result) => {
+    getBarberAvail(barber.name).then((result) => {
       if (result) {
         setAllAvail(result)
       }
@@ -22,17 +27,17 @@ export default function BarberAvailability() {
   }, [])
 
   function updateList(avail) {
-    addBarberAvail(barberName, avail).then((result) => {
+    addBarberAvail(barber.name, avail).then((result) => {
       if (result) {
         console.log(avail)
-        setAllAvail([...allAvail, avail])
+        setAllAvail(result)
       }
     })
   }
 
   function removeOneCharacter(index) {
     console.log(allAvail[index])
-    deleteBarberAvail(barberName, allAvail[index]).then((result) => {
+    deleteBarberAvail(barber.name, allAvail[index]).then((result) => {
       if (result) {
         const updated = allAvail.filter((avail, i) => {
           return i !== index
@@ -45,6 +50,7 @@ export default function BarberAvailability() {
 
   return (
     <div>
+      < Navbar class="navbar"/>
       <Table characterData={allAvail} removeCharacter={removeOneCharacter} />
       <Form handleSubmit={updateList} />
     </div>
