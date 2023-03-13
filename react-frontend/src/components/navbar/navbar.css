@@ -31,7 +31,8 @@
 .signin {
   justify-content: right;
   margin-top: 8px;
-  margin-left: 1200px;
+  position: relative;
+  left: 71%;
 }
 
 #navlink {
