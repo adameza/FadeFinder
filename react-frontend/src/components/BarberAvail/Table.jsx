@@ -15,6 +15,9 @@ function TableHeader() {
 function convertTime(date) {
   let time = new Date(date)
   let hrs = time.getHours()
+  // if (hrs != 0) {
+  //   hrs = hrs - 1
+  // }
   console.log(hrs)
   if (hrs === 0) hrs = 12
   let min = time.getMinutes()

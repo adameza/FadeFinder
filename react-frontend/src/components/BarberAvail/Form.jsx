@@ -51,7 +51,13 @@ function Form(props) {
     console.log(hourDiff)
     console.log(len.value)
     let _start = new Date(date0)
+    if (_start.getHours() != 0) {
+      _start.setHours(_start.getHours() - 1)
+    }
     let _end = new Date(date0)
+    if (_end.getHours() != 0) {
+      _end.setHours(_end.getHours() - 1)
+    }
     if (len.label === '1 Hour') {
       console.log("true")
     }
@@ -85,7 +91,7 @@ function Form(props) {
     for (let i = 1; i <= recur && checked; i++) {
       avail_list.forEach((x) => {
         let _start = new Date(x.startTime).setDate(x.startTime.getDate() + 7 * i)
-        let _end = new Date(x.startTime).setDate(x.endTime.getDate() + 7 * i)
+        let _end = new Date(x.endTime).setDate(x.endTime.getDate() + 7 * i)
         recur_list.push({startTime: new Date(_start), endTime: new Date(_end)})
       })
     }
