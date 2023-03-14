@@ -86,7 +86,7 @@ export default function BarberFinder() {
               latitude={Number(popupInfo.lat)}
               onClose={() => setPopupInfo(null)}
             >
-              <BarberPopUp barber={popupInfo} reroute={toClientReg}/>
+              <BarberPopUp barber={popupInfo} reroute={toClientReg} />
             </Popup>
           )}
         </Map>
