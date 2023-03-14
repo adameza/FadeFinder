@@ -8,13 +8,19 @@ const AppointmentSchema = new mongoose.Schema(
       startTime: Date,
       endTime: Date
     },
-    client: {
-      type: mongoose.Schema.Types.Mixed,
+    clientName: {
+      type: String,
+      required: true,
+      trim: false,
+    },
+    clientEmail: {
+      type: String,
       required: true,
       trim: false,
     },
     barber_id: {
       type: mongoose.Schema.Types.ObjectId,
+      ref: 'Barber',
       required: true,
       trim: false,
     },

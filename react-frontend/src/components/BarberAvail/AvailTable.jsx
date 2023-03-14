@@ -61,7 +61,7 @@ function TableBody(props) {
   return <tbody>{rows}</tbody>
 }
 
-function Table(props) {
+function AvailTable(props) {
   return (
     <table>
       <TableHeader />
@@ -72,4 +72,4 @@ function Table(props) {
     </table>
   )
 }
-export default Table
+export default AvailTable

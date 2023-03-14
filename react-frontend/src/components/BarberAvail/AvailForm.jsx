@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
-import './form.css'
+import './AvailForm.css'
 import TimeRange from 'react-time-range'
 
 
-function Form(props) {
+function AvailForm(props) {
 
   const appointTimes = [
     {value: '0.5', label: '30 Min'},
@@ -120,4 +120,4 @@ function Form(props) {
     </form>
   )
 }
-export default Form
+export default AvailForm

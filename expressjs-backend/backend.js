@@ -62,7 +62,7 @@ app.get('/barbers/:name', async (req, res) => {
   }
 })
 
-app.get('/barbers/:name/:email', async (req, res) => {
+app.get('/barbers/nameandemail/:name/:email', async (req, res) => {
   const targetName = req.params['name']
   const targetEmail = req.params['email']
   const all_barbers = await barberServices.getBarbers()
@@ -104,6 +104,28 @@ app.delete('/barbers/:name/avail', async (req, res) => {
 app.post('/barbers', async (req, res) => {
   const barber = req.body
   const result = await barberServices.addBarber(barber)
+  if (result) res.status(201).send(result)
+  else res.status(500).end()
+})
+
+app.post('/barbers/:name/appointments', async (req, res) => {
+  const barberName = req.params['name'] //or req.params.id
+  const appointment = req.body
+  const result = await barberServices.addBarberAppointment(barberName, appointment)
+  if (result) res.status(201).send(result)
+  else res.status(500).end()
+})
+
+app.get('/barbers/:name/appointments', async (req, res) => {
+  const barberName = req.params['name'] //or req.params.id
+  const result = await barberServices.getBarberAppointments(barberName)
+  if (result) res.status(201).send(result)
+  else res.status(500).end()
+})
+
+app.patch('/barbers', async (req, res) => {
+  const updatedBarber = req.body
+  const result = await barberServices.updateBarber(updatedBarber)
   if (result) res.status(201).send(result)
   else res.status(500).end()
 })

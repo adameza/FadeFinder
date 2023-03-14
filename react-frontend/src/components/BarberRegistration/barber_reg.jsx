@@ -16,8 +16,6 @@ export default function BarberRegistration() {
   const [imPath, setImPath] = useState("")
   const [badAddr, setBadAddr] = useState(false)
   const [addr, setAddr] = useState("Old Slo BBQ, San Luis Obispo")
-  const [lati, setLat] = useState(0.0)
-  const [long, setLon] = useState(0.0)
   const location = useLocation()
   const user = location.state.oAuthRes
   const navigate = useNavigate()

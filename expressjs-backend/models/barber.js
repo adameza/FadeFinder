@@ -28,7 +28,7 @@ const BarberSchema = new mongoose.Schema(
       trim: true,
     },
     availability: [{ startTime: Date, endTime: Date }],
-    appointments: [ { type: mongoose.Types.ObjectId } ],
+    appointments: [ { type: mongoose.Types.ObjectId, ref: "Appointment"} ],
     lat: { type: Number },
     lon: { type: Number },
   },

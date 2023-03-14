@@ -2,17 +2,16 @@ import './clientreg.css'
 import React, { useState } from 'react'
 import Table from './Table'
 import { addAppointment } from '../../BackendRoutes/appointment-routes'
-import { getBarberByName } from '../../BackendRoutes/barber-routes'
+import { deleteBarberAvail, addBarberAppoint } from '../../BackendRoutes/barber-routes'
+import { useNavigate } from 'react-router-dom'
 import { Navbar } from '../navbar/navbar'
 import { useLocation } from 'react-router-dom'
 import {ConfirmDialog} from 'primereact/confirmdialog'
 
 export default function ClientRegistration() {
   const [selectedAvail, setSelectedAvail] = useState({startTime: null,endTime: null, _id: null})
-  const [appDate, setAppDate] = useState('')
   const [allDates, setAllDates] = useState([])
   const [visible, setVisible] = useState(false)
-  const [message, setMessage] = useState("")
   const [client, setClient] = useState({
     name: '',
     email: ''
@@ -20,28 +19,34 @@ export default function ClientRegistration() {
 
   const location = useLocation()
   const barber = location.state.popupInfo
+  const navigate = useNavigate()
 
-  const scheduleAppointment = (index) => {
+  const scheduleAppointment = () => {
     console.log(client)
-    const newAppoint = {startTime: selectedAvail.startTime, endTime: selectedAvail.endTime, _id: selectedAvail._id} 
-    getBarberByName(barber.name).then((barberRes) => {
-      console.log(barberRes)
-      const appoint = {
-        date: newAppoint,
-        client: client,
-        barber_id: barberRes.barber._id}
-      console.log(appoint)
-      // addAppointment(appoint).then((result) =>{
-      //   if (result) {
-      //     deleteBarberAvail(barberRes.barber.name, newAppoint)
-      //   }
-      // })
+    const newAppoint = {
+      date: { startTime: selectedAvail.startTime, endTime: selectedAvail.endTime },
+      clientName: client.name,
+      clientEmail: client.email,
+      barber_id: barber._id
+    }
+    addAppointment(newAppoint).then((appRes) => {
+      console.log(appRes.data)
+      deleteBarberAvail(barber.name, selectedAvail).then((delAvailRes) => {
+        addBarberAppoint(barber.name, appRes.data).then((res) => {
+          setVisible(false)
+          navigate('/appointment/success', { state: appRes.data })
+        }).catch((error) => {
+          console.log(error)
+        })
+      }).catch((delAvailError) => {
+        console.log(delAvailError)
+      })
+    }).catch((AppError) => {
+      console.log(AppError)
     })
-
   }
 
   const fetchAppointments = (selectedDate) => {
-    setAppDate(selectedDate)
     console.log(barber.availability)
     const dates = barber.availability.filter((avail) => {
       let tempDate = new Date(avail.startTime)

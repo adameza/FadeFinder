@@ -68,13 +68,46 @@ export async function getBarberByName(barberName) {
   }
 }
 
-export async function getBarberByNameAndEmail(barber) {
+export async function getBarberAppointments(barberName) {
   try {
-    const response = await axios.get('http://localhost:5000/barbers/'.concat(barber.name + "/" + barber.email))
+    const response = await axios.get('http://localhost:5000/barbers/'.concat(barberName + '/appointments'))
     return response.data
   } catch (error) {
     console.log(error.response)
     return error.response
+  }
+}
+
+export async function getBarberByNameAndEmail(barber) {
+  try {
+    const response = await axios.get('http://localhost:5000/barbers/nameandemail/'.concat(barber.name + "/" + barber.email))
+    return response.data
+  } catch (error) {
+    console.log(error.response)
+    return error.response
+  }
+}
+
+export async function updateBarber(updatedBarber) {
+  try {
+    const response = await axios.patch('http://localhost:5000/barbers', updatedBarber)
+    return response
+  } catch (error) {
+    console.log(error)
+    return error
+  }
+}
+
+export async function addBarberAppoint(barberName, appointment) {
+  try {
+    const response = await axios.post(
+      'http://localhost:5000/barbers/'.concat(barberName) + '/appointments',
+      appointment
+    )
+    return response
+  } catch (error) {
+    console.log(error)
+    return false
   }
 }
 

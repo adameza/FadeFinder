@@ -8,6 +8,7 @@ import ClientRegistration from './components/ClientRegister/clientreg'
 import BarberFinder from './components/BarberFinder/barberfinder'
 import BarberDashboard from './components/BarberDashboard/barber_dash';
 import BarberRegistration from './components/BarberRegistration/barber_reg';
+import { SuccessSplash } from './components/SuccessSplash/SuccessSplash';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path="/barber/availability" element={<BarberAvailability />} />
             <Route path="/barber/dashboard" element={<BarberDashboard />} />
             <Route path="/barber/register" element={<BarberRegistration />} />
+            <Route path="/appointment/success" element={<SuccessSplash />} />
             <Route path="/" element={<BarberFinder />} />
           </Routes>
         </BrowserRouter>}

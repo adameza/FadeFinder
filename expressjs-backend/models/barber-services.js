@@ -75,8 +75,57 @@ async function deleteAvailabilty(barber_name, avail) {
   }
 }
 
+async function updateBarber(updatedBarber) {
+  try {
+    const res = await barberModel.updateOne(
+      { name: updatedBarber.name },
+      { $set: {address: updatedBarber.address, 
+        bio: updatedBarber.bio, 
+        imgPath:updatedBarber.imgPath, 
+        lat: updatedBarber.lat,
+        lon: updatedBarber.lon}}
+    )
+    return res
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
+async function addBarberAppointment(barber_name, appointment) {
+  try {
+    const barber = await barberModel.findOne({ name: barber_name })
+    let apps_list = barber.appointments
+    apps_list.push(appointment._id)
+    const res = await barberModel.updateOne(
+      { name: barber_name },
+      { $set: {appointments: apps_list}}
+    )
+    return res
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
+async function getBarberAppointments(barber_name) {
+  try {
+    const apps_list = await barberModel.findOne({ name: barber_name }).populate('appointments')
+    console.log("here")
+    console.log(apps_list)
+    return apps_list.appointments
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
+
 exports.getBarbers = getBarbers
 exports.getBarberByName = getBarberByName
 exports.addBarber = addBarber
 exports.addAvailability = addAvailability
 exports.deleteAvailabilty = deleteAvailabilty
+exports.updateBarber = updateBarber
+exports.addBarberAppointment = addBarberAppointment
+exports.getBarberAppointments = getBarberAppointments
