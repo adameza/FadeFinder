@@ -5,7 +5,7 @@ const cors = require('cors')
 const express = require('express')
 const app = express()
 
-const port = 5000
+const port = process.env.PORT
 
 const clientServices = require('./models/client-services')
 const barberServices = require('./models/barber-services')
