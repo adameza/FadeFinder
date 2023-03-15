@@ -15,7 +15,7 @@ const utils = require ('./oauth_utils');
 app.use(cors())
 app.use(express.json())
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
 
@@ -144,3 +144,6 @@ app.post('/appointments', async (req, res) => {
   if (result) res.status(201).send(result)
   else res.status(500).end()
 })
+
+
+module.exports = server;

@@ -1,0 +1,8 @@
+@startuml uml
+class "Client" as Client{
+	name : String
+    email : String
+    
+}
+
+@enduml
