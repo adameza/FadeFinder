@@ -10,7 +10,6 @@ const port = 5000
 const clientServices = require('./models/client-services')
 const barberServices = require('./models/barber-services')
 const appointmentServices = require('./models/appointment-services')
-const utils = require ('./oauth_utils');
 
 app.use(cors())
 app.use(express.json())
