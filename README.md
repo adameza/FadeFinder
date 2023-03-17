@@ -1,8 +1,8 @@
 # FadeFinder
 
-- After you pull run `npm install` in /react-frontend
+- After you pull run `npm install` in /react-frontend and /expressjs-backend
 
-- The only urls we have right now are "http://localhost:3000/customerlogin" and "http://localhost:3000/barberlogin"
+- Run `npm start` in /react-frontend to start the frontend and in /expressjs-backend to start the backend
 
 - Style guide used: React/JavaScript (airbnb)
 
