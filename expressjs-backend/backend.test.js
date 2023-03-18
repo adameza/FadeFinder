@@ -5,18 +5,6 @@ const barberModel = require('./models/barber')
 
 require("dotenv").config();
 
-
-/* Connecting to the database before each test. */
-beforeEach(async () => {
-  await mongoose.connect(process.env.MONGODB_URI);
-});
-
-/* Closing database connection after each test. */
-afterEach(async () => {
-  await mongoose.connection.close();
-});
-
-
 describe("GET /barbers", () => {
   it("should return all barbers", async () => {
     const res = await request(app).get("/barbers");
