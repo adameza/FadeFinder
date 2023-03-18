@@ -1,4 +1,3 @@
-import './App.css'
 import React, { useState, useEffect } from 'react';
 import BarberPole from './components/Home/loading';
 import './components/Home/startupScreenText.css'; // import the CSS file for the startup animation styles
